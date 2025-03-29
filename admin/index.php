@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = pg_fetch_assoc($result);
             if (password_verify($password, $user['password'])) {
                 // Successful login
-                header("Location: ../dashboard/index.php");
+                header("Location: ../dashboard/index.html");
                 exit(); // Stop further execution
             } else {
                 echo "<script>window.onload = function() { showErrorAlert('Invalid username or password.'); };</script>";
