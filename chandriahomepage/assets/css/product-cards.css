@@ -1,0 +1,690 @@
+/* ============= UNIFIED PRODUCT CARDS STYLES ============= */
+/* Centralized product card styling for consistent appearance across:
+ * - index.html (homepage product cards)
+ * - shop.html (main product grid)
+ * - details.html (related products section)
+ */
+
+/* ============= BASE PRODUCT CARD STRUCTURE ============= */
+.product-item {
+    border-radius: 14px;
+    box-shadow: 0 2px 16px rgba(40, 167, 69, 0.07);
+    background: #fff;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.15);
+}
+
+/* ============= PRODUCT IMAGES ============= */
+.product-images {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 14px 14px 0 0;
+}
+
+/* Product banner overlay for better button visibility */
+.product-images::after,
+.product-banner::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    transition: all 0.3s ease;
+    z-index: 2;
+    border-radius: 14px 14px 0 0;
+}
+
+/* Keep overlay transparent on hover for cleaner look */
+.product-item:hover .product-images::after,
+.product-images:hover::after,
+.product-item:hover .product-banner::after,
+.product-banner:hover::after {
+    background: rgba(0, 0, 0, 0);
+}
+
+.product-img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.product-img.hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.product-item:hover .product-img.hover {
+    opacity: 1;
+}
+
+.product-item:hover .product-img.default {
+    opacity: 0;
+}
+
+/* ============= PRODUCT ACTIONS (HOVER BUTTONS) ============= */
+.product-actions {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    display: flex !important;
+    gap: 15px !important;
+    opacity: 0 !important;
+    transition: all 0.3s ease !important;
+    z-index: 4 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-direction: row !important;
+}
+
+.product-item:hover .product-actions,
+.product-actions:hover {
+    opacity: 1 !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+.action-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+    color: #333 !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.25s ease !important;
+    transform: scale(0.9) !important;
+    border: 2px solid #eee !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+}
+
+.product-item:hover .product-actions .action-btn,
+.product-actions:hover .action-btn {
+    transform: scale(1) !important;
+}
+
+.action-btn:hover {
+    background-color: hsl(346, 100%, 74%) !important; /* Pink on hover */
+    color: white !important; /* White text color on hover */
+    transform: scale(1.05) !important;
+    box-shadow: 0 3px 10px rgba(255, 154, 175, 0.3) !important;
+    border-color: transparent !important;
+}
+
+.action-btn:active {
+    transform: scale(0.95) !important;
+}
+
+.action-btn i {
+    font-size: 15px !important;
+}
+
+/* Loading state for buttons */
+.action-btn.loading {
+    pointer-events: none !important;
+    opacity: 0.7 !important;
+}
+
+.action-btn.loading i {
+    animation: spin 1s linear infinite !important;
+}
+
+/* Favorited state for heart button */
+.action-btn.favorited {
+    background-color: hsl(346, 100%, 74%) !important;
+    color: white !important;
+    border-color: hsl(346, 100%, 74%) !important;
+}
+
+/* ============= HEART BUTTON STYLING (BOXICONS) ============= */
+
+/* Base heart button styling */
+.add-to-favorites-btn i {
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+/* Enhanced heart button styling for all contexts */
+.action-btn i.bx-heart,
+.action-btn i.bxs-heart {
+    font-size: 16px;
+    transition: all 0.3s ease;
+    color: #666; /* Default gray color */
+}
+
+/* Pink color for favorited hearts in all contexts */
+.action-btn.favorited i.bxs-heart,
+.add-to-favorites-btn.favorited i.bxs-heart {
+    color: #ff69b4 !important; /* Bright pink color */
+}
+
+/* Hover effect for all heart buttons */
+.action-btn:hover i.bx-heart,
+.action-btn:hover i.bxs-heart,
+.add-to-favorites-btn:hover i {
+    color: #ff69b4 !important;
+    transform: scale(1.1);
+}
+
+/* Special styling for favorited button background */
+.action-btn.favorited {
+    background-color: rgba(255, 105, 180, 0.1) !important;
+    border-color: #ff69b4 !important;
+}
+
+/* Loading state styling for Boxicons spinner */
+.action-btn.loading i.bx-spin,
+.add-to-favorites-btn.loading i.bx-spin {
+    animation: spin 1s linear infinite;
+    color: #ff69b4 !important;
+}
+
+/* Pink color for favorited hearts */
+.add-to-favorites-btn.favorited i,
+.add-to-favorites-btn.favorited i.bxs-heart {
+    color: hsl(346, 100%, 74%) !important; /* Pink color */
+}
+
+/* Hover effect for favorited products - enhance pink color */
+.product-item.in-wishlist:hover .add-to-favorites-btn i,
+.product-item.in-wishlist .add-to-favorites-btn:hover i {
+    color: #ff1493 !important; /* Deeper pink on hover */
+    transform: scale(1.2);
+}
+
+/* Special hover effect for products in wishlist */
+.product-item.in-wishlist:hover .add-to-favorites-btn {
+    background-color: hsl(346, 100%, 74%) !important;
+    color: white !important;
+    border-color: hsl(346, 100%, 74%) !important;
+    transform: scale(1.1) !important;
+    box-shadow: 0 4px 15px rgba(255, 154, 175, 0.4) !important;
+}
+
+/* Pulsing animation for products in wishlist on hover */
+.product-item.in-wishlist:hover .add-to-favorites-btn {
+    animation: heartPulse 0.6s ease-in-out !important;
+}
+
+/* Loading state for heart button */
+.add-to-favorites-btn.loading i.bx-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes heartPulse {
+    0%, 100% { transform: scale(1.05); }
+    50% { transform: scale(1.15); }
+}
+
+/* ============= PRICE TAG ============= */
+.price-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--first-color, hsl(346, 100%, 74%));
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    z-index: 4;
+    transition: all 0.3s ease;
+}
+
+.product-item:hover .price-tag,
+.price-tag:hover {
+    background-color: hsl(346, 100%, 68%);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* ============= COLOR INDICATOR ============= */
+.product-color-indicator {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 4;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item:hover .product-color-indicator {
+    transform: scale(1.2);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Color indicator tooltip */
+.color-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.color-tooltip::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.8);
+}
+
+/* ============= PRODUCT CONTENT ============= */
+.product-content {
+    padding: 15px 20px 20px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Product header with title, category and action button */
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-header-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+}
+
+/* ============= ADD TO CART ACTION BUTTON ============= */
+.add-to-cart-action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--first-color, hsl(346, 100%, 74%));
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(255, 105, 135, 0.3);
+    margin-top: 8px;
+}
+
+.add-to-cart-action-btn:hover {
+    background: var(--first-color-alt, hsl(346, 100%, 68%));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 105, 135, 0.4);
+}
+
+.add-to-cart-action-btn:active {
+    transform: translateY(0);
+}
+
+.add-to-cart-action-btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.add-to-cart-action-btn.loading i {
+    animation: spin 1s linear infinite;
+}
+
+/* ============= SIZE AND QUANTITY CONTROLS ============= */
+/* Hidden by default - can be shown with specific classes */
+.product-size-options {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px 8px;
+    background-color: #f9f9f9;
+    border-radius: 0 0 8px 8px;
+    border-top: 1px solid #eee;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Show size options when enabled */
+.product-item.show-size-options .product-size-options {
+    display: flex;
+}
+
+.size-selection {
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+.size-selector {
+    width: 68%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 14px;
+    color: #333;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.size-selector:focus {
+    outline: none;
+    border-color: hsl(346, 100%, 74%);
+    box-shadow: 0 0 0 3px hsla(346, 100%, 74%, 0.1);
+}
+
+.quantity-selection {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: white;
+    width: 68%;
+}
+
+.quantity-btn {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: #333;
+    font-weight: bold;
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    transition: background 0.2s, border-color 0.2s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantity-btn:hover {
+    background: #ffe6f0;
+    border-color: hsl(346, 100%, 74%);
+}
+
+.quantity-value {
+    font-size: 15px;
+    font-weight: 600;
+    min-width: 28px;
+    text-align: center;
+    color: #333;
+}
+
+.stock-indicator {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    color: #666;
+    pointer-events: none;
+}
+
+.low-stock {
+    color: #e67e22;
+}
+
+.very-low-stock {
+    color: #e74c3c;
+    font-weight: 500;
+}
+
+/* ============= CIRCULAR CART BUTTON ============= */
+.circular-cart-btn {
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 50% !important;
+    background: var(--first-color) !important;
+    color: white !important;
+    border: none !important;
+    cursor: pointer;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    font-size: 20px !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    transform: none !important;
+    animation: none !important;
+    box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3) !important;
+    margin-top: 8px;
+    position: relative;
+    min-width: 45px !important;
+    max-width: 45px !important;
+    min-height: 45px !important;
+    max-height: 45px !important;
+}
+
+.circular-cart-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.circular-cart-btn:hover {
+    transform: none !important;
+    animation: none !important;
+}
+
+.circular-cart-btn:hover svg {
+    transform: none !important;
+    animation: none !important;
+}
+
+.circular-cart-btn:active {
+    transform: none !important;
+    animation: none !important;
+}
+
+.circular-cart-btn[data-in-cart="true"] {
+    background: #e74c3c;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.10);
+}
+
+.circular-cart-btn[data-in-cart="false"] {
+    background: #28a745;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.10);
+}
+
+.circular-cart-btn[data-in-cart="true"]:hover {
+    background: #c0392b !important;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.10) !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+.circular-cart-btn[data-in-cart="false"]:hover {
+    background: #218838 !important;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.10) !important;
+    transform: none !important;
+    animation: none !important;
+}
+
+.circular-cart-btn.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+.circular-cart-btn.loading svg {
+    animation: spin 1s linear infinite;
+}
+
+.circular-cart-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+}
+
+.circular-cart-btn:active::after {
+    width: 100%;
+    height: 100%;
+}
+
+/* ============= RESPONSIVE DESIGN ============= */
+@media (max-width: 768px) {
+    .product-item {
+        border-radius: 10px;
+    }
+    
+    .product-actions {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translate(-50%, -50%) !important;
+        gap: 10px !important;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+    }
+    
+    .action-btn {
+        width: 36px !important;
+        height: 36px !important;
+        transform: scale(1) !important;
+    }
+    
+    .action-btn i {
+        font-size: 14px !important;
+    }
+    
+    .circular-cart-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    
+    .circular-cart-btn svg {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    
+    .product-img {
+        height: 220px;
+    }
+    
+    .product-content {
+        padding: 12px 16px 16px 16px;
+    }
+    
+    .product-header {
+        margin-bottom: 10px;
+    }
+    
+    .add-to-booking-btn {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .add-to-booking-btn i {
+        font-size: 16px;
+    }
+}
+
+/* ============= GRID LAYOUTS ============= */
+/* Desktop grid layout */
+@media screen and (min-width: 769px) {
+    .products-container.grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        padding: 0;
+    }
+}
+
+/* Tablet grid layout */
+@media screen and (max-width: 768px) and (min-width: 481px) {
+    .products-container.grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Mobile grid layout */
+@media screen and (max-width: 480px) {
+    .products-container.grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+}
+
+/* ============= SPECIAL CONTEXT OVERRIDES ============= */
+/* For related products section - remove size/quantity controls */
+.products-container .product-size-options,
+.products.container .product-size-options {
+    display: none !important;
+}
+
+/* For related products section - hide cart buttons */
+.products-container .circular-cart-btn,
+.products.container .circular-cart-btn {
+    display: none !important;
+}
+
+/* Ensure consistent card heights */
+.products-container .product-item,
+.products.container .product-item {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.products-container .product-content,
+.products.container .product-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-------------------------------- FLATICON --------------------------------->
+        <link
+            rel="stylesheet"
+            href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css"
+        />
+
+        <!-------------------------------- BOXICONS --------------------------------->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!---------------------------------- SWIPER CSS ---------------------------------->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
+
+        <!-------------------------------- GOOGLE FONTS --------------------------------->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- NOTYF CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />        <!-------------------------------- CSS --------------------------------->        <link rel="stylesheet" href="chandriahomepage/assets/css/styles.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/nav-bar.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/hamburger-mob.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/product-cards.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/auth-modal.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/quick-view.css" />        <link rel="stylesheet" href="chandriahomepage/assets/css/spinner.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/index-fixes.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/index-quick-view-override.css" />
+        <link rel="stylesheet" href="chandriahomepage/assets/css/chatbot.css" />
+
+        <!-- Firebase SDK -->
+        <script type="module" src="admin/firebase-config.js"></script>
+
+        <title>Chandria's La Robe - Book Your Fitting Appointment</title>
+    </head>    <body>        <!-- Page Loading Spinner -->
+        <div id="page-spinner" class="page-spinner">
+            <div class="spinner-content">
+                <div class="spinner-ring-container">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="spinner-text">Loading page, please wait...</p>
+            </div>
+        </div>        <!-- Details Navigation Loader -->
+        <div id="details-navigation-loader" class="page-spinner hidden">
+            <div class="spinner-content">
+                <div class="spinner-ring-container">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="spinner-text">Loading Products, Please Wait.</p>
+            </div>
+        </div>
+
+        <!-------------------------------- MODERN STICKY HEADER -------------------------------->
+        <header class="header modern-header" id="header">
+            <nav class="nav container">
+                <a href="index.html" class="nav-logo">
+                    <img
+                        src="chandriahomepage/assets/img/logo1.png"
+                        alt="Chandria's La Robe"
+                        class="nav-logo-img"
+                    />
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="#home" class="nav-link smooth-scroll">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#categories" class="nav-link smooth-scroll">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#products" class="nav-link smooth-scroll">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#contact" class="nav-link smooth-scroll">About</a>
+                        </li>
+                    </ul>
+                </div>                <div class="header-user-actions">
+                    <!-- Mobile Hamburger Menu -->
+                    <div class="hamburger-menu" id="hamburger-menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>                    <a href="chandriahomepage/wishlist.html" class="header-action-btn">
+                        <img src="chandriahomepage/assets/img/icon-heart.svg" alt="Wishlist" />
+                        <span class="count" id="wishlist-count">0</span>
+                    </a>
+                    <a href="chandriahomepage/cart.html" class="header-action-btn">
+                        <img src="chandriahomepage/assets/img/icon-cart.svg" alt="Cart" />                    <span class="count" id="cart-count">0</span>
+                    </a>                    <button onclick="window.profileNavService?.handleAccountClick() || showAuthModal()" class="header-action-btn" id="account-btn" style="background: none; border: none; cursor: pointer;">
+                        <img src="chandriahomepage/assets/img/icon-user.svg" alt="" />
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="#home" class="mobile-nav-link smooth-scroll">Home</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#categories" class="mobile-nav-link smooth-scroll">Categories</a>
+                    </li>                    <li class="mobile-nav-item">
+                        <a href="#products" class="mobile-nav-link smooth-scroll">Products</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#contact" class="mobile-nav-link smooth-scroll">About</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!-------------------------------- MAIN CONTENT -------------------------------->
+        <main class="main">
+            <!-------------------------------- MODERN HERO SECTION -------------------------------->
+            <section class="hero section-lg" id="home">
+                <!-- Floating bubbles for aesthetic -->
+                <div class="hero-floating-bubbles">
+                    <div class="hero-bubble hero-bubble-1"></div>
+                    <div class="hero-bubble hero-bubble-2"></div>
+                    <div class="hero-bubble hero-bubble-3"></div>
+                    <div class="hero-bubble hero-bubble-4"></div>
+                    <div class="hero-bubble hero-bubble-5"></div>
+                    <div class="hero-bubble hero-bubble-6"></div>
+                    <div class="hero-bubble hero-bubble-7"></div>
+                    <div class="hero-bubble hero-bubble-8"></div>
+                    <div class="hero-bubble hero-bubble-9"></div>
+                    <div class="hero-bubble hero-bubble-10"></div>
+                    <div class="hero-bubble hero-bubble-11"></div>
+                    <div class="hero-bubble hero-bubble-12"></div>
+                    <div class="hero-bubble hero-bubble-13"></div>
+                    <div class="hero-bubble hero-bubble-14"></div>
+                    <div class="hero-bubble hero-bubble-15"></div>
+                </div>
+                <div class="hero-container container">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <i class="fi fi-rs-star"></i>
+                            <span>Premium Fitting Experience</span>
+                        </div>
+                        <h1 class="hero-title">
+                            Book Your Perfect
+                            <span class="hero-highlight">Fitting</span>
+                            <br>Experience Today
+                        </h1>
+                        <p class="hero-description">
+                            Browse our exquisite collection online, then visit our physical store for professional fitting and styling consultation. Get the perfect fit for your special moments.
+                        </p>
+                        <div class="hero-actions">
+                            <a href="chandriahomepage/shop.html" class="btn btn-primary hero-btn">
+                                <i class="fi fi-rs-shopping-bag"></i>
+                                Browse Collection
+                            </a>
+                            <a href="#contact" class="btn btn-outline hero-btn smooth-scroll">
+                                <i class="fi fi-rs-calendar"></i>
+                                Book Appointment
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-image-wrapper">
+                            <img src="chandriahomepage/assets/img/home-img3.png" alt="Elegant Gowns" class="hero-img" />
+                            <div class="hero-decoration">
+                                <div class="hero-circle hero-circle-1"></div>
+                                <div class="hero-circle hero-circle-2"></div>
+                                <div class="hero-float-card">
+                                    <i class="fi fi-rs-heart"></i>
+                                    <span>Premium Quality</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>            </section>
+
+            <!-------------------------------- POLICY FEATURES -------------------------------->
+            <section class="policy section">
+                <div class="policy-container container">
+                    <div class="policy-grid">
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fi fi-rs-shield-check"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4 class="policy-title">Free Fitting</h4>
+                                <p class="policy-text">Up to 3 items per appointment</p>
+                            </div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fi fi-rs-time-fast"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4 class="policy-title">Quick Service</h4>
+                                <p class="policy-text">Best fitting consultation</p>
+                            </div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fi fi-rs-star"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4 class="policy-title">Quality Guarantee</h4>
+                                <p class="policy-text">Premium fabric & craftsmanship</p>
+                            </div>
+                        </div>
+                        <div class="policy-item">
+                            <div class="policy-icon">
+                                <i class="fi fi-rs-calendar"></i>
+                            </div>
+                            <div class="policy-content">
+                                <h4 class="policy-title">Flexible Booking</h4>
+                                <p class="policy-text">Easy rescheduling available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-------------------------------- MODERN CATEGORIES SECTION -------------------------------->
+            <section class="categories section" id="categories">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-header-content">
+                            <h2 class="section-title">
+                                Browse Our <span>Categories</span>
+                            </h2>
+                            <p class="section-subtitle">
+                                Discover our curated collection of elegant gowns, suits, and accessories for every special occasion
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="categories-section-wrapper">
+                        <div class="categories-container swiper">
+                            <div class="swiper-wrapper">
+                                <!-- First set of categories -->
+                                <a href="chandriahomepage/shop.html?category=ball-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-1.jpg" alt="Ball Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Ball Gowns</h3>
+                                    <p class="category-description">Elegant evening wear</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=long-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-2.jpg" alt="Long Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Long Gowns</h3>
+                                    <p class="category-description">Sophisticated styles</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=wedding-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-3.jpg" alt="Wedding Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Wedding Gowns</h3>
+                                    <p class="category-description">Bridal perfection</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=fairy-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-4.jpg" alt="Fairy Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Fairy Gowns</h3>
+                                    <p class="category-description">Whimsical designs</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=suits" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-5.jpg" alt="Suits" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Suits</h3>
+                                    <p class="category-description">Professional attire</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=additionals" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-6.jpg" alt="Additionals" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Additionals</h3>
+                                    <p class="category-description">Accessories & more</p>
+                                </a>
+
+                                <!-- Second set of categories (duplicate for seamless loop) -->
+                                <a href="chandriahomepage/shop.html?category=ball-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-1.jpg" alt="Ball Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Ball Gowns</h3>
+                                    <p class="category-description">Elegant evening wear</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=long-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-2.jpg" alt="Long Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Long Gowns</h3>
+                                    <p class="category-description">Sophisticated styles</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=wedding-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-3.jpg" alt="Wedding Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Wedding Gowns</h3>
+                                    <p class="category-description">Bridal perfection</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=fairy-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-4.jpg" alt="Fairy Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Fairy Gowns</h3>
+                                    <p class="category-description">Whimsical designs</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=suits" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-5.jpg" alt="Suits" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Suits</h3>
+                                    <p class="category-description">Professional attire</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=additionals" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-6.jpg" alt="Additionals" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Additionals</h3>
+                                    <p class="category-description">Accessories & more</p>
+                                </a>
+
+                                <!-- Third set of categories (duplicate for seamless loop) -->
+                                <a href="chandriahomepage/shop.html?category=ball-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-1.jpg" alt="Ball Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Ball Gowns</h3>
+                                    <p class="category-description">Elegant evening wear</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=long-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-2.jpg" alt="Long Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Long Gowns</h3>
+                                    <p class="category-description">Sophisticated styles</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=wedding-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-3.jpg" alt="Wedding Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Wedding Gowns</h3>
+                                    <p class="category-description">Bridal perfection</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=fairy-gowns" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-4.jpg" alt="Fairy Gowns" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Fairy Gowns</h3>
+                                    <p class="category-description">Whimsical designs</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=suits" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-5.jpg" alt="Suits" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Suits</h3>
+                                    <p class="category-description">Professional attire</p>
+                                </a>
+
+                                <a href="chandriahomepage/shop.html?category=additionals" class="category-item swiper-slide">
+                                    <div class="category-image-wrapper">
+                                        <img src="chandriahomepage/assets/img/category-6.jpg" alt="Additionals" class="category-img" />
+                                        <div class="category-overlay">
+                                            <i class="fi fi-rs-arrow-right category-icon"></i>
+                                        </div>
+                                    </div>
+                                    <h3 class="category-title">Additionals</h3>
+                                    <p class="category-description">Accessories & more</p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Custom Navigation Buttons -->
+                        <div class="swiper-button-prev custom-prev-btn">
+                            <i class="fi fi-rs-angle-left"></i>
+                        </div>
+                        <div class="swiper-button-next custom-next-btn">
+                            <i class="fi fi-rs-angle-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-------------------------------- FREE FITTING SERVICE SECTION -------------------------------->
+            <section class="free-fitting section">
+                <div class="container">
+                    <!-- Free Fitting Service Notice -->
+                    <div class="free-fitting-notice">
+                        <!-- Floating bubbles for aesthetic -->
+                        <div class="floating-bubbles">
+                            <div class="bubble bubble-1"></div>
+                            <div class="bubble bubble-2"></div>
+                            <div class="bubble bubble-3"></div>
+                            <div class="bubble bubble-4"></div>
+                            <div class="bubble bubble-5"></div>
+                            <div class="bubble bubble-6"></div>
+                        </div>
+                        <div class="free-fitting-content">
+                            
+                            <div class="free-fitting-text">
+                                <h3 class="free-fitting-title">Free Fitting Service Before Booking</h3>
+                                <p class="free-fitting-description">
+                                    We offer complimentary fitting sessions to ensure your perfect look. Our experienced staff will help you find the ideal size and style for your special occasion.
+                                </p>
+                                <div class="free-fitting-features">
+                                    <span class="feature-item">
+                                        <i class="fi fi-rs-check"></i>
+                                        Perfect Fitting
+                                    </span>
+                                    <span class="feature-item">
+                                        <i class="fi fi-rs-check"></i>
+                                        Size Consultation
+                                    </span>
+                                    <span class="feature-item">
+                                        <i class="fi fi-rs-check"></i>
+                                        Style Advice
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-------------------------------- MODERN PRODUCTS SECTION WITH TABS -------------------------------->
+            <section class="products section" id="products">
+                <div class="container">
+                    <!-- Product Tabs -->
+                    <div class="product-tabs">
+                        <button class="product-tab active-tab" data-tab="latest">
+                            Latest 
+                        </button>
+                        <button class="product-tab" data-tab="hot">
+                            Hot
+                        </button>
+                        <button class="product-tab" data-tab="popular">
+                            Popular
+                        </button>
+                    </div>
+
+                    <!-- Product Content -->
+                    <div class="product-tab-content active-tab" id="latest">
+                        <div class="products-container grid" id="fresh-products-container">
+                            <!-- Fresh products will be loaded here from inventory -->
+                        </div>
+                    </div>
+
+                    <div class="product-tab-content" id="hot">
+                        <div class="products-container grid" id="hot-products-container">
+                            <!-- Hot products will be loaded here -->
+                        </div>
+                    </div>
+
+                    <div class="product-tab-content" id="popular">
+                        <div class="products-container grid" id="popular-products-container">
+                            <!-- Popular products will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- View All Products Button -->
+                    <div class="products-actions">
+                        <a href="chandriahomepage/shop.html" class="btn btn-outline view-all-btn">
+                            <i class="fi fi-rs-arrow-right"></i>
+                            View All Products
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-------------------------------- MODERN CONTACT & BOOKING SECTION -------------------------------->
+            <section class="contact-booking section" id="contact">
+                <div class="container">
+                    <div class="contact-booking-grid">
+                        <!-- Store Information -->
+                        <div class="store-info">
+                            <div class="store-info-header">
+                                <h3 class="section-title">
+                                    Visit Our <span>Physical Store</span>
+                                </h3>
+                                <p class="section-subtitle">
+                                    Experience personalized fitting and styling consultation
+                                </p>
+                            </div>
+                            
+                            <div class="store-details">
+                                <div class="store-detail-item">
+                                    <div class="store-detail-icon">
+                                        <i class="fi fi-rs-marker"></i>
+                                    </div>
+                                    <div class="store-detail-content">
+                                        <h4 class="store-detail-title">Our Location</h4>
+                                        <p class="store-detail-text">
+                                            B42 L13 Bilbao Street, Hacienda La Joya Subdivision<br />
+                                            Imus, Cavite, Philippines
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="store-detail-item">
+                                    <div class="store-detail-icon">
+                                        <i class="fi fi-rs-phone-call"></i>
+                                    </div>
+                                    <div class="store-detail-content">
+                                        <h4 class="store-detail-title">Contact Number</h4>
+                                        <p class="store-detail-text">+63 000 000 000</p>
+                                    </div>
+                                </div>
+
+                                <div class="store-detail-item">
+                                    <div class="store-detail-icon">
+                                        <i class="fi fi-rs-clock"></i>
+                                    </div>
+                                    <div class="store-detail-content">
+                                        <h4 class="store-detail-title">Fitting Hours</h4>
+                                        <p class="store-detail-text">
+                                            Monday - Sunday: 08:00 AM - 9:00 PM<br />
+                                            We'll notify you if we're not available
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="store-actions">
+                                <a href="chandriahomepage/about-policy.html" class="btn btn-outline">
+                                    <i class="fi fi-rs-document"></i>
+                                    About & Policies
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Booking Information -->
+                        <div class="booking-info">
+                            <div class="booking-info-header">
+                                <h3 class="section-title">
+                                    <span>Booking</span> Information
+                                </h3>
+                                <p class="section-subtitle">
+                                    Everything you need to know about our fitting services
+                                </p>
+                            </div>
+
+                            <div class="booking-features">
+                                <div class="booking-feature-item">
+                                    <div class="booking-feature-icon">
+                                        <i class="fi fi-rs-tags"></i>
+                                    </div>
+                                    <div class="booking-feature-content">
+                                        <h4 class="booking-feature-title">Free Fitting Policy</h4>
+                                        <p class="booking-feature-text">
+                                            Free fitting for up to 3 items/products. Additional fittings are ₱100 each
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="booking-feature-item">
+                                    <div class="booking-feature-icon">
+                                        <i class="fi fi-rs-clothes-hanger"></i>
+                                    </div>
+                                    <div class="booking-feature-content">
+                                        <h4 class="booking-feature-title">Product Preparation</h4>
+                                        <p class="booking-feature-text">
+                                            We prepare your selected gown when you book it. You can also book a blank appointment
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="booking-feature-item">
+                                    <div class="booking-feature-icon">
+                                        <i class="fi fi-rs-bell"></i>
+                                    </div>
+                                    <div class="booking-feature-content">
+                                        <h4 class="booking-feature-title">Availability Notice</h4>
+                                        <p class="booking-feature-text">
+                                            If your selected product is already booked, we'll notify you immediately
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="booking-actions">
+                                <a href="chandriahomepage/shop.html" class="btn btn-primary">
+                                    <i class="fi fi-rs-shopping-bag"></i>
+                                    Browse Our Products
+                                </a>
+                                <a href="chandriahomepage/about-policy.html" class="btn btn-outline">
+                                    <i class="fi fi-rs-document"></i>
+                                    About & Policies
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>        </main>
+
+        <!--=============== AUTHENTICATION MODAL ===============-->
+        <div id="auth-modal" class="auth-modal-container">
+            <div class="auth-modal">
+                <button class="auth-close" id="auth-close">
+                    &times;
+                </button>
+                
+                <div class="auth-content">                    <!-- Left Side - Image -->
+                    <div class="auth-image-section">
+                        <img src="chandriahomepage/assets/img/authenimage.jpg" alt="Chandria's La Robe" class="auth-image" />
+                    </div>
+                    
+                    <!-- Right Side - Forms -->
+                    <div class="auth-form-section">
+                        <!-- Sign In Form -->
+                        <div class="auth-form active" id="signin-form">
+                            <div class="auth-header">
+                                <h2>Welcome Back</h2>
+                                <p>Sign in to your account</p>
+                            </div>
+                            
+                            <form class="auth-form-content" id="signin-form-element">
+                                <div class="auth-input-group">
+                                    <label for="signin-email">Email Address</label>
+                                    <input type="email" id="signin-email" name="email" required />
+                                </div>
+                                
+                                <div class="auth-input-group">
+                                    <label for="signin-password">Password</label>
+                                    <input type="password" id="signin-password" name="password" required />
+                                </div>
+                                
+                                <div class="auth-forgot">
+                                    <a href="#" id="forgot-password-link">Forgot Password?</a>
+                                </div>
+                                
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Sign In
+                                </button>                                <div class="auth-divider">
+                                    <span>or</span>
+                                </div>                                <div class="auth-social">
+                                    <button type="button" class="auth-social-btn google-btn" id="google-signin" title="Sign in with Google">
+                                        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                                            <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                                            <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                                            <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                                        </svg>
+                                        <span>Continue with Google</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="auth-switch">
+                                    <span>Don't have an account? </span>
+                                    <a href="#" id="switch-to-signup">Sign Up</a>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Sign Up Form -->
+                        <div class="auth-form" id="signup-form">
+                            <div class="auth-header">
+                                <h2>Create Account</h2>
+                                <p>Join us for the perfect fitting experience</p>                            </div>                              <form class="auth-form-content" id="signup-form-element">                                <!-- Full Name -->
+                                <div class="auth-input-group">
+                                    <label for="signup-fullname">Full Name</label>
+                                    <input type="text" id="signup-fullname" name="fullname" required />
+                                </div>
+                                  <!-- Contact Number -->
+                                <div class="auth-input-group">
+                                    <label for="signup-contact">Contact Number</label>
+                                    <input type="tel" id="signup-contact" name="contact" required />
+                                </div>
+                                  <!-- Email Address -->
+                                <div class="auth-input-group">
+                                    <label for="signup-email">Email Address</label>
+                                    <input type="email" id="signup-email" name="email" required />
+                                </div>
+                                
+                                <!-- Password and Confirm Password in one row -->
+                                <div class="auth-input-row">
+                                    <!-- Password -->
+                                    <div class="auth-input-group">
+                                        <label for="signup-password">Password</label>
+                                        <input type="password" id="signup-password" name="password" required />
+                                    </div>
+                                    
+                                    <!-- Confirm Password -->
+                                    <div class="auth-input-group">
+                                        <label for="signup-confirm-password">Confirm Password</label>
+                                        <input type="password" id="signup-confirm-password" name="confirm-password" required />
+                                    </div>
+                                </div>
+                                  <button type="submit" class="auth-btn auth-btn-primary">
+                                    Sign Up
+                                </button>                                <div class="auth-divider">
+                                    <span>or continue with</span>
+                                </div>
+
+                                <div class="auth-social">
+                                    <button type="button" class="auth-social-btn google-btn" id="google-signin" title="Sign in with Google">
+                                        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                                            <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                                            <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                                            <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                                        </svg>
+                                        <span>Continue with Google</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="auth-switch">
+                                    <span>Already have an account? </span>
+                                    <a href="#" id="switch-to-signin">Sign in</a>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Forgot Password Form -->
+                        <div class="auth-form" id="forgot-form">
+                            <div class="auth-header">
+                                <h2>Reset Password</h2>
+                                <p>Enter your email to receive reset instructions</p>
+                            </div>
+                            
+                            <form class="auth-form-content" id="forgot-form-element">
+                                <div class="auth-input-group">
+                                    <label for="forgot-email">Email Address</label>
+                                    <input type="email" id="forgot-email" name="email" required />
+                                </div>
+                                
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Send Reset Link
+                                </button>
+                                
+                                <div class="auth-switch">
+                                    <a href="#" id="back-to-signin">Back to Sign In</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------------- FOOTER -------------------------------->
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-main">
+                        <img src="chandriahomepage/assets/img/logo1.png" alt="Chandria's La Robe" class="footer-logo" />
+                        <p class="footer-text">
+                            Your premier destination for perfect fit gowns and suits.
+                        </p>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <a href="chandriahomepage/shop.html" class="footer-link">Shop</a>
+                        <a href="#categories" class="footer-link">Categories</a>
+                        <a href="#products" class="footer-link">Products</a>
+                        <a href="#contact" class="footer-link">About</a>
+
+                    </div>
+                    
+                    <div class="footer-social">
+                        <a href="#" class="footer-social-link">
+                            <i class="fi fi-rs-facebook"></i>
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <i class="fi fi-rs-instagram"></i>
+                        </a>
+                        <a href="#" class="footer-social-link">
+                            <i class="fi fi-rs-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p class="footer-copyright">
+                        &copy; 2025 Chandria's La Robe. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- NOTYF CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+
+        <!---------------------------------- SWIPER JS ---------------------------------->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        
+        <!-- JQUERY CDN -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>        <!-------------------------------- JS --------------------------------->        <script src="chandriahomepage/assets/js/spinner/spinner-core.js"></script>
+        <script src="chandriahomepage/assets/js/spinner/spinner-page.js"></script>
+        <script src="chandriahomepage/assets/js/spinner/spinner-utils.js"></script>
+        <script src="chandriahomepage/assets/js/hamburger-mob.js"></script>
+        <script src="chandriahomepage/assets/js/quick-view/quick-view.js"></script>
+        <script src="chandriahomepage/assets/js/nav-bar.js"></script>
+        <script type="module" src="chandriahomepage/assets/js/profile-nav-service.js"></script>
+        <script src="chandriahomepage/assets/js/main.js"></script>
+        <script type="module" src="chandriahomepage/assets/js/auth-modal.js"></script>
+        <script type="module" src="./chandriahomepage/assets/js/wishlist-firebase.js"></script>
+        <script type="module" src="./chandriahomepage/assets/js/index.js"></script>
+                <script type="module" src="./chandriahomepage/assets/js/chatbot/chatbot-init.js"></script>
+
+    </body>
+</html>
