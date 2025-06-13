@@ -13,7 +13,7 @@
             "destination": "/index.html"
         },
         {
-            "source": "/index.html",
+            "source": "index.html",
             "destination": "/"
         }
     ]
