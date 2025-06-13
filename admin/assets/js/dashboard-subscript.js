@@ -7,49 +7,12 @@ import {
     signOut
 } from "./sdk/chandrias-sdk.js";
 
-// SHOW VISIBILITY IF ADMIN
-const isAdminLoggedIn = localStorage.getItem("adminLoggedIn");
-if (isAdminLoggedIn === "true") {
-    // Valid admin: show the dashboard
-    $("body").css("visibility", "visible");
-}
-
-// REDIRECT TO HOMEPAGE IF USER IS LOGGED IN
-const isUserLoggedIn = localStorage.getItem("userLoggedIn");
-if (isUserLoggedIn === "true") {
-    // User is logged in, redirect to homepage
-    window.location.href = "../index.html";
-} else if (isAdminLoggedIn !== "true") {
-    // Neither user nor admin logged in, redirect to homepage
-    window.location.href = "../index.html";
-}
-
 $(document).ready(function () {
     console.log("Dashboard Page.");
     // Initialize date and time display
     updateDateTime();
     // Update every second
     setInterval(updateDateTime, 1000);
-
-    // COMMENTED OUT: Check if user is already signed in, if so, redirect to HOME PAGE
-    // onAuthStateChanged(auth, async user => {
-    //     if (user) {
-    //         // Check if user exists in userAccounts
-    //         const userDocRef = doc(chandriaDB, "userAccounts", user.uid);
-    //         const userDocSnap = await getDoc(userDocRef);
-
-    //         if (userDocSnap.exists()) {
-    //             // If user is customer, sign them out
-    //             await signOut(auth);
-    //             window.location.href = "../index.html";
-    //             return;
-    //         }
-    //     }
-
-    //     if (!user) {
-    //         window.location.href = "./authentication.html";
-    //     }
-    // });
 });
 
 // Date and Time Update Function

@@ -31,7 +31,8 @@ $(document).ready(function () {
             $("#email").val("No Admin Logged In.");
         }
     });
-
+    
+    // DISPLAY ADMIN PROFILE FUNCTION
     async function loadAdminProfile() {
         const user = auth.currentUser;
 
@@ -56,22 +57,6 @@ $(document).ready(function () {
             notyf.error("Error loading profile data.");
         }
     }
-
-    // COMMENTED OUT: Check if the user is logged in and display the email
-    // onAuthStateChanged(auth, user => {
-    //     if (user) {
-    //         // User is signed in
-    //         const userEmail = user.email;
-    //         $("#email").val(userEmail); // Update the email input field
-
-    //         // Extract name from email (part before @) or use displayName if available
-    //         const userName = user.displayName || userEmail.split('@')[0];
-    //         $("#name").val(userName);
-    //     } else {
-    //         // If no user is logged in, redirect to login page
-    //         window.location.href = "authentication.html";
-    //     }
-    // });
 
     // SHOW PASSWORD FIELD
     $("#togglePasswordFields").on("click", function () {
@@ -228,6 +213,7 @@ $(document).ready(function () {
 
         try {
             await signOut(auth);
+            localStorage.setItem("adminLoggedIn", "false");
             notyf.success("You have been successfully signed out.");
             logoutModal.removeClass("show");
             setTimeout(() => {
