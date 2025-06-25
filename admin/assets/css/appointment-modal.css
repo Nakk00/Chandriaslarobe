@@ -1,0 +1,51 @@
+/* Add custom CSS for the appointment status tag */
+.appointment-status-tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.appointment-status-tag.confirmed-tag {
+    background-color: #e8f5e9;
+    color: #28a745;
+}
+
+.appointment-status-tag.cancelled-tag {
+    background-color: #f8d7da;
+    color: #dc3545;
+}
+
+.appointment-status-tag i {
+    margin-right: 8px;
+}
+
+/* Style for the undo confirmation button */
+.undo-confirmation {
+    background-color: #ffc107;
+    color: #212529;
+    border: 1px solid #ffc107;
+}
+
+.undo-confirmation:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+    color: #212529;
+}
+
+/* Style for the undo cancellation button */
+.undo-cancellation {
+    background-color: #ffc107;
+    color: #212529;
+    border: 1px solid #ffc107;
+}
+
+.undo-cancellation:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+    color: #212529;
+}

@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!--=============== FLATICON ===============-->
+        <link
+            rel="stylesheet"
+            href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css"
+        />
+
+        <!--=============== SWIPER CSS ===============-->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
+        <!-- NOTYF CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
+        
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+        
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="./assets/css/nav-bar.css" />
+        <link rel="stylesheet" href="./assets/css/hamburger-mob.css" />
+        <link rel="stylesheet" href="./assets/css/styles.css" />
+        <link rel="stylesheet" href="./assets/css/accountsettings.css" />
+        <link rel="stylesheet" href="./assets/css/spinner.css" />
+        <link rel="stylesheet" href="./assets/css/chatbot.css" />
+        <link rel="stylesheet" href="./assets/css/profile-nav-override.css" />
+        <!-- Font Awesome for icons -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <title>My Account - Chandria's La Robe</title>
+    </head>
+    <body class="page-accounts">
+        <!-- Page Loading Spinner -->
+        <div id="page-spinner" class="page-spinner">
+            <div class="spinner-content">
+                <div class="spinner-ring-container">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="spinner-text">Loading page, please wait...</p>
+            </div>
+        </div>
+
+        <!-- UPLOAD SPINNER -->
+        <div id="spinner" class="page-spinner hidden">
+            <div class="spinner-content">
+                <div class="spinner-ring-container">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="spinner-text" id="spinner-text">Uploading</p>
+            </div>
+        </div>
+
+        <!--=============== HEADER ===============-->
+        <header class="header">
+            <nav class="nav container">
+                <a href="../index.html" class="nav-logo">
+                    <img
+                        src="assets/img/logo1.png"
+                        alt=""
+                        class="nav-logo-img"
+                    />
+                </a>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#categories" class="nav-link">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="shop.html" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#contact" class="nav-link">About</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="header-user-actions">
+                    <!-- Mobile Hamburger Menu -->
+                    <div class="hamburger-menu" id="hamburger-menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>
+
+                    <a href="wishlist.html" class="header-action-btn">
+                        <img src="assets/img/icon-heart.svg" alt="" />
+                        <span class="count" id="wishlist-count">0</span>
+                    </a>
+
+                    <a href="./cart.html" class="header-action-btn">
+                        <img src="assets/img/icon-cart.svg" alt="" />
+                        <span class="count" id="cart-count">0</span>
+                    </a>
+
+                    <button onclick="window.profileNavService?.handleAccountClick() || showAuthModal()" class="header-action-btn" style="background: none; border: none; cursor: pointer;" id="account-btn">
+                        <img src="assets/img/icon-user.svg" alt="" />
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="../index.html" class="mobile-nav-link">Home</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#categories" class="mobile-nav-link">Categories</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="shop.html" class="mobile-nav-link">Shop</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#reviews" class="mobile-nav-link">Reviews</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#contact" class="mobile-nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!--=============== MAIN ===============-->
+        <main class="main">
+            <!--=============== ACCOUNT PAGE ===============-->
+            <section class="account-page">
+                <div class="account-page-container">
+                    
+                    <div class="account-layout">
+                        <!-- Sidebar Navigation -->
+                        <div class="account-sidebar">
+                            <nav class="sidebar-nav">
+                                <ul class="sidebar-menu">
+                                    <li class="sidebar-item active">
+                                        <button class="sidebar-link" data-section="settings">
+                                            <i class="fas fa-user-cog"></i>
+                                            <span>Account Settings</span>
+                                        </button>
+                                    </li>
+                                    <li class="sidebar-item">
+                                        <button class="sidebar-link" data-section="bookings">
+                                            <i class="fas fa-calendar-alt"></i>
+                                            <span>Booking History</span>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <!-- Main Content Area -->
+                        <div class="account-content">
+                            <!-- Account Settings Section -->
+                            <div class="content-section active" id="settings-section">
+                                <div class="section-header">
+                                    <h3 class="section-title">Account Settings</h3>
+                                    <p class="section-subtitle">Manage your account information and preferences</p>
+                                </div>
+
+                                <div class="settings-content-wrapper">
+                                    <div class="settings-form-column">
+                                        <div class="form-group">
+                                            <label for="email">Email Address</label>
+                                            <input
+                                                class="disabled"
+                                                type="email"
+                                                id="email"
+                                                disabled
+                                            />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" id="name" value="" />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button
+                                                type="button"
+                                                class="btn-change-password"
+                                                id="togglePasswordFields"
+                                            >
+                                                Change Password
+                                            </button>
+                                        </div>
+
+                                        <div id="passwordFields" style="display: none">
+                                            <div class="form-group">
+                                                <label for="password">Current Password</label>
+                                                <input
+                                                    type="password"
+                                                    id="password"
+                                                    value=""
+                                                />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="new-password">New Password</label>
+                                                <input
+                                                    type="password"
+                                                    id="new-password"
+                                                    value=""
+                                                />
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="confirm-new-password">Confirm New Password</label>
+                                                <input
+                                                    type="password"
+                                                    id="confirm-new-password"
+                                                    value=""
+                                                />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button
+                                                type="submit"
+                                                class="btn btn-primary disabled"
+                                                id="save-btn"
+                                            >
+                                                Save Changes
+                                            </button>
+                                            <button
+                                                type="button"
+                                                class="btn btn-secondary cancel-btn"
+                                                style="border: 2px solid hsl(346, 98%, 74%)"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="form-actions">
+                                            <button
+                                                type="button"
+                                                class="btn btn-danger"
+                                                id="logout-btn"
+                                                style="background: rgb(193, 2, 2)"
+                                            >
+                                                <i class="fas fa-sign-out-alt"></i>
+                                                Logout
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="settings-avatar-column">
+                                        <div class="avatar-container">
+                                            <div class="avatar-placeholder">
+                                                <div class="avatar-content">
+                                                    <i class="fas fa-user"></i>
+                                                    <span>AVATAR</span>
+                                                </div>
+                                            </div>
+                                            <button
+                                                type="button"
+                                                class="avatar-reset-btn"
+                                                onclick="resetAvatar()"
+                                                style="display: none"
+                                            >
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <label for="profile-image-upload" class="btn-upload">
+                                            <i class="fas fa-upload"></i>
+                                            Upload Picture
+                                        </label>
+                                        <input
+                                            type="file"
+                                            id="profile-image-upload"
+                                            accept="image/*"
+                                            onchange="previewImage(event)"
+                                            style="display: none"
+                                        />
+
+                                        <a href="#" id="del-acc" class="delete-account-link">
+                                            <i class="fas fa-trash-alt"></i> Delete Account
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Booking History Section -->
+                            <div class="content-section" id="bookings-section">
+                                <div class="section-header">
+                                    <h3 class="section-title">Booking History</h3>
+                                    <p class="section-subtitle">View and manage your rental bookings</p>
+                                </div>
+
+                                <div class="bookings-content">
+                                    <!-- Filter Options -->
+                                    <div class="bookings-filters">
+                                        <div class="filter-group">
+                                            <select class="filter-select" id="status-filter">
+                                                <option value="all">All Bookings</option>
+                                                <option value="upcoming">Upcoming</option>
+                                                <option value="completed">Completed</option>
+                                                <option value="cancelled">Cancelled</option>
+                                            </select>
+                                        </div>
+                                        <div class="filter-group">
+                                            <input type="date" class="filter-input" id="date-filter" placeholder="Filter by date">
+                                        </div>
+                                        <div class="filter-group">
+                                            <input type="text" class="filter-input" id="search-filter" placeholder="Search bookings...">
+                                        </div>
+                                        <div class="filter-group">
+                                            <button type="button" class="btn btn-secondary" id="clear-filters-btn">
+                                                <i class="fas fa-times"></i>
+                                                Clear Filters
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Bookings List -->
+                                    <div class="bookings-list" id="bookings-list">
+                                        <!-- Sample Booking Items (will be populated dynamically) -->
+                                        <div class="booking-card">
+                                            <div class="booking-image">
+                                                <img src="assets/img/wedding-gown.jpg" alt="Wedding Gown" />
+                                            </div>
+                                            <div class="booking-details">
+                                                <h4 class="booking-title">Elegant Wedding Gown</h4>
+                                                <p class="booking-date">
+                                                    <i class="fas fa-calendar"></i>
+                                                    Rental Date: March 15, 2025
+                                                </p>
+                                                <p class="booking-duration">
+                                                    <i class="fas fa-clock"></i>
+                                                    Duration: 3 days
+                                                </p>
+                                                <p class="booking-price">
+                                                    <i class="fas fa-tag"></i>
+                                                    Total: ₱2,500.00
+                                                </p>
+                                            </div>
+                                            <div class="booking-status">
+                                                <span class="status-badge status-upcoming">Upcoming</span>
+                                            </div>
+                                            <div class="booking-actions">
+                                                <button class="btn-action btn-view">
+                                                    <i class="fas fa-eye"></i>
+                                                    View Details
+                                                </button>
+                                                <button class="btn-action btn-cancel">
+                                                    <i class="fas fa-times"></i>
+                                                    Cancel
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <div class="booking-card">
+                                            <div class="booking-image">
+                                                <img src="assets/img/long-gown.jpg" alt="Evening Gown" />
+                                            </div>
+                                            <div class="booking-details">
+                                                <h4 class="booking-title">Luxury Evening Gown</h4>
+                                                <p class="booking-date">
+                                                    <i class="fas fa-calendar"></i>
+                                                    Rental Date: February 20, 2025
+                                                </p>
+                                                <p class="booking-duration">
+                                                    <i class="fas fa-clock"></i>
+                                                    Duration: 2 days
+                                                </p>
+                                                <p class="booking-price">
+                                                    <i class="fas fa-tag"></i>
+                                                    Total: ₱1,800.00
+                                                </p>
+                                            </div>
+                                            <div class="booking-status">
+                                                <span class="status-badge status-completed">Completed</span>
+                                            </div>
+                                            <div class="booking-actions">
+                                                <button class="btn-action btn-view">
+                                                    <i class="fas fa-eye"></i>
+                                                    View Details
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Empty State -->
+                                        <div class="empty-bookings" style="display: none;">
+                                            <div class="empty-icon">
+                                                <i class="fas fa-calendar-times"></i>
+                                            </div>
+                                            <h3>No bookings found</h3>
+                                            <p>You haven't made any bookings yet. Start exploring our collection!</p>
+                                            <a href="shop.html" class="btn btn-primary">
+                                                <i class="fas fa-shopping-bag"></i>
+                                                Browse Collection
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>        <!-- DELETE ACCOUNT MODAL -->
+        <div class="del-acc-modal-container">
+            <div class="del-acc-modal-box">
+                <div class="del-acc-modal-content" id="del-acc-regular-content">
+                    <h3>Delete Account</h3>
+                    <p>This action cannot be undone. Please enter your password to confirm.</p>
+                    <label for="del-acc-password">Enter Current Password:</label>
+                    <input type="password" id="del-acc-password" value="" />
+                    <div class="btn-group">
+                        <button class="btn-cancel" id="del-acc-cancel">Cancel</button>
+                        <button class="btn-submit" id="del-acc-confirm">
+                            <span id="btn-text">Confirm</span>
+                            <span id="btn-spinner" class="btn-spinner" style="display: none"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="del-acc-modal-content" id="del-acc-google-content" style="display: none;">
+                    <h3>Delete Account</h3>
+                    <p>This action cannot be undone. All your data including bookings, wishlist, and profile information will be permanently deleted.</p>
+                    <div class="btn-group">
+                        <button class="btn-cancel" id="del-acc-google-cancel">Cancel</button>
+                        <button class="btn-submit" id="del-acc-google-confirm">
+                            <span id="btn-google-text">Confirm</span>
+                            <span id="btn-google-spinner" class="btn-spinner" style="display: none"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CLEAR FILTERS CONFIRMATION MODAL -->
+        <div class="clear-filters-modal-container" id="clear-filters-modal">
+            <div class="clear-filters-modal-box">
+                <div class="clear-filters-modal-content">
+                    <h3>Clear All Filters</h3>
+                    <p>Are you sure you want to clear all active filters? This will reset the booking history view.</p>
+                    <div class="btn-group">
+                        <button class="btn-cancel" id="clear-filters-cancel">Cancel</button>
+                        <button class="btn-submit" id="clear-filters-confirm">Clear Filters</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGOUT CONFIRMATION MODAL -->
+        <div class="logout-modal-container" id="logout-modal">
+            <div class="logout-modal-box">
+                <div class="logout-modal-content">
+                    <h3>Confirm Logout</h3>
+                    <p>Are you sure you want to log out?</p>
+                    <div class="btn-group">
+                        <button class="btn-cancel" id="logout-cancel">
+                            Cancel
+                        </button>
+                        <button class="btn-submit" id="logout-confirm">
+                            <span id="logout-btn-text">Logout</span>
+                            <span id="logout-btn-spinner" class="btn-spinner" style="display: none"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--=============== SWIPER JS ===============-->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <!-- NOTYF CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <!-- JQUERY CDN -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>
+        <!--=============== MAIN JS ===============-->
+        <script src="./assets/js/hamburger-mob.js"></script>
+        <script src="./assets/js/nav-bar.js"></script>
+        <script type="module" src="./assets/js/profile-nav-service.js"></script>
+        <script type="module" src="./assets/js/wishlist-firebase.js"></script>
+        <script src="./assets/js/page-focus.js"></script>
+        <script type="module" src="./assets/js/auth-modal.js"></script>
+        <script type="module" src="./assets/js/accountsettings.js"></script>
+        <script src="./assets/js/spinner/spinner-core.js"></script>
+        <script src="./assets/js/spinner/spinner-page.js"></script>
+        <script src="./assets/js/spinner/spinner-utils.js"></script>
+        <script type="module" src="./assets/js/chatbot/chatbot-init.js"></script>
+    </body>
+</html>

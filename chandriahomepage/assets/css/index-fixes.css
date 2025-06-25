@@ -1,0 +1,129 @@
+/* Index.html specific fixes */
+
+/* Ensure account button is visible with high specificity */
+#account-btn,
+button#account-btn,
+.header-action-btn#account-btn,
+button.header-action-btn#account-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: rgba(255, 133, 177, 0.1) !important;
+    border: 2px solid transparent !important;
+    cursor: pointer !important;
+    padding: 8px !important;
+    border-radius: 50% !important;
+    width: 45px !important;
+    height: 45px !important;
+    transition: all 0.3s ease !important;
+    position: relative !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+#account-btn:hover,
+button#account-btn:hover,
+.header-action-btn#account-btn:hover,
+button.header-action-btn#account-btn:hover {
+    background: rgba(255, 133, 177, 0.2) !important;
+    border-color: rgba(255, 133, 177, 0.4) !important;
+    transform: translateY(-1px) !important;
+    box-shadow: 0 3px 10px rgba(255, 133, 177, 0.15) !important;
+}
+
+#account-btn img,
+button#account-btn img,
+.header-action-btn#account-btn img,
+button.header-action-btn#account-btn img {
+    width: 20px !important;
+    height: 20px !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Remove pink focus borders from all elements */
+*:focus,
+*:focus-visible,
+*:focus-within,
+input:focus,
+button:focus,
+textarea:focus,
+select:focus,
+a:focus,
+.auth-modal input:focus,
+.auth-modal button:focus,
+.auth-modal textarea:focus,
+.header-action-btn:focus,
+.nav-link:focus {
+    outline: none !important;
+    border-color: hsl(346, 100%, 74%) !important;
+    box-shadow: none !important;
+}
+
+/* Sticky header */
+.header {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Add top margin to body to account for fixed header */
+body {
+    margin-top: 80px !important;
+}
+
+/* Ensure main content doesn't get hidden behind header */
+.main {
+    padding-top: 20px !important;
+}
+
+/* Mobile responsiveness for sticky header */
+@media screen and (max-width: 768px) {
+    body {
+        margin-top: 70px !important;
+    }
+}
+
+/* Debugging styles for account icon */
+#account-icon {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: none !important;
+    max-height: none !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+}
+
+/* Force visibility for header-user-actions */
+.header-user-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 1rem !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Force visibility for all action buttons */
+.header-action-btn {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Mobile specific fix to reduce space above Premium Fitting Experience section */
+@media screen and (max-width: 768px) {
+
+    .hero-image {
+        margin-bottom: -10rem !important;
+        margin-top: 3.5rem !important;
+    }
+}

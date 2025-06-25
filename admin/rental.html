@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />        <title>Chandria's La Robe - Rental Management</title>
+
+        <!-- BOX-ICON CDN -->
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+
+        <!-- NOTYF CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
+          <!-- EXTERNAL CSS -->
+        <link rel="stylesheet" href="./assets/css/admin-layout.css" />
+        <link rel="stylesheet" href="./assets/css/admin-layout-mob.css" />
+        <link rel="stylesheet" href="./assets/css/rental.css" />
+    </head>
+
+    <body>        <!-- ====== RENTAL LOADER ====== -->
+        <div id="rental-loader" class="rental-loader hidden">
+            <div class="rental-loader-content">
+                <div class="rental-spinner"></div>
+                <div class="rental-loader-text">Loading data of rentals and transactions.</div>
+            </div>
+        </div>
+
+        <!-- LOADING SPINNER -->
+        <div class="container-spinner d-none" id="spinner">
+            <div class="spinner"></div>
+            <div class="spinner-text" id="spinner-text">Uploading</div>
+        </div>
+
+        <nav class="sidebar close">
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                        <img
+                            src="./assets/images/chandriaslogo.png"
+                            alt="logo"
+                        />
+                    </span>
+                </div>
+
+                <i class="bx bx-chevron-right toggle"></i>
+            </header>
+
+            <div class="menu-bar">
+                <div class="menu">
+                    <ul class="menu-links">                        <li class="nav-link">
+                            <a href="./dashboard.html">
+                                <i class="bx bxs-dashboard icon"></i>
+                                <span class="text nav-text">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./analytics.html">
+                                <i class="bx bxs-bar-chart-alt-2 icon"></i>
+                                <span class="text nav-text">Analytics</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./inventory.html">
+                                <i class="bx bxs-t-shirt icon"></i>
+                                <span class="text nav-text">Inventory</span>
+                            </a>
+                            <!-- <i class='bx bxs-chevron-down'></i> -->
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./calendar.html">
+                                <i class="bx bxs-calendar icon"></i>
+                                <span class="text nav-text">Calendar</span>
+                            </a>
+                        </li>                        <li class="nav-link active">
+                            <a href="./rental.html">
+                                <i class="bx bxs-package icon"></i>
+                                <span class="text nav-text">Rental</span>
+                            </a>
+                        </li>                        <li class="nav-link">
+                            <a href="./customer-logs.html">
+                                <i class="bx bxs-user icon"></i>
+                                <span class="text nav-text">Logs History</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./settings.html">
+                                <i class="bx bxs-cog icon"></i>
+                                <span class="text nav-text">Settings</span>
+                            </a>
+                        </li>
+
+                        <!-- <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-wallet icon'></i>
+                            <span class="text nav-text">Transaction</span>
+                        </a>
+                    </li> -->
+                    </ul>
+                </div>
+
+                <div class="bottom-content"></div>
+            </div>
+        </nav>        <!-- Sidebar End; Start of Rental and Transaction Form -->
+
+        <main class="main-content">
+            <header class="page-header">
+                <div class="header-left">
+                    <h1 class="page-title">Rental Management</h1>
+                    <p class="page-subtitle">Create new rentals and manage rental transactions</p>
+                </div>
+            </header>            <div class="page-content">
+                <!-- Main Rental Container -->
+                <div class="rental-container">
+                    <!-- Left Section - Products Table -->
+                    <div class="products-section">
+                        <!-- Filter Section -->
+                        <div class="filter-section">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="products">Products</button>
+                            <button class="filter-btn" data-filter="additionals">Additionals</button>
+                        </div>
+
+                        <!-- Search Section -->
+                        <div class="search-section">
+                            <div class="search-container">
+                                <i class="bx bx-search search-icon"></i>
+                                <input type="text" class="search-input" placeholder="Search products..." />
+                            </div>
+                        </div>
+
+                        <!-- Products Table -->
+                        <div class="table-container">
+                            <table class="products-table">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th>Product Code</th>
+                                        <th>Category</th>
+                                        <th>Size</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="products-table-body">
+                                    <!-- Table rows will be populated by JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>                    <!-- Right Section - Order Rental List -->
+                    <div class="order-section">                        <div class="order-header">
+                            <h3>Rental List</h3>
+                            <div class="order-header-actions">
+                                <button class="add-fee-btn" id="add-fee-btn">
+                                    <i class="bx bx-plus"></i>
+                                    Add Fee
+                                </button>
+                                <button class="clear-btn" id="clear-cart-btn">
+                                    <i class="bx bx-trash"></i>
+                                    Clear
+                                </button>
+                            </div>
+                        </div><div class="order-content">
+                            <div class="order-items" id="order-items">
+                                <!-- Rental List icon when empty -->
+                                <div class="empty-cart" id="empty-cart">
+                                    <i class="bx bx-shopping-bag"></i>
+                                    <p>No items in Rental List</p>
+                                </div>                        </div>
+
+                            <div class="order-summary">
+                                <div class="summary-row total-row">
+                                    <span>Total:</span>
+                                    <span id="cart-total-amount">₱0.00</span>
+                                </div>
+                            </div>
+
+                            <button class="proceed-btn" id="cart-checkout-btn">
+                                <i class="bx bx-credit-card"></i>
+                                PROCEED TO PAYMENT
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- PRODUCT SIZE MODAL -->
+        <div id="product-size-modal" class="modal">
+            <div class="product-size-modal-content modal-content">
+                <div class="modal-header">
+                    <span class="close-modal">&times;</span>
+                    <h3>Select Product Size</h3>
+                </div>
+                
+                <div class="modal-body">
+                    <form id="product-size-form">
+                        <label>
+                            <input type="checkbox" name="availableSize" value="Small" />
+                            <span>Small</span>
+                        </label>
+                        <label>
+                            <input type="checkbox" name="availableSize" value="Medium" />
+                            <span>Medium</span>
+                        </label>
+                    </form>
+
+                    <!-- STORING DETAILS -->
+                    <div class="storing-details">
+                        <span id="modal-product-code"></span>
+                        <span id="modal-product-name"></span>
+                        <span id="modal-product-price"></span>
+                    </div>
+
+                    <button id="proceed-btn" class="disabled">Proceed</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accessory Selection Modal -->
+        <div id="accessory-modal" class="modal modal-hidden">
+            <div class="modal-content">                <span class="close-modal">&times;</span>
+                <h3>Select Accessory Types</h3>
+
+                <form id="accessory-form">
+                    <label
+                        ><input type="checkbox" id="select-all-accessories" />
+                        <strong>Select All</strong></label
+                    ><br />
+                    <label
+                        ><input
+                            type="checkbox"
+                            name="accessoryType"
+                            value="Bracelet"
+                        />
+                        Bracelet</label
+                    ><br />
+                    <label
+                        ><input
+                            type="checkbox"
+                            name="accessoryType"
+                            value="Earrings"
+                        />
+                        Earrings</label
+                    ><br />
+                </form>
+                <button id="save-accessory-types">Save</button>
+            </div>
+        </div>
+
+        <!-- Error Modal -->        <div
+            id="error-modal"
+            class="modal modal-hidden"
+        >            <div class="modal-content error-modal-content">                <span
+                    class="close-modal error-close error-close-btn"
+                    >&times;</span
+                >
+                <h3 class="error-modal-title">Error</h3>                <div
+                    id="error-modal-message"
+                    class="error-modal-message"
+                ></div>                <button
+                    id="error-modal-ok"
+                    class="error-modal-ok-btn"
+                >
+                    OK
+                </button>
+            </div>
+        </div>
+
+        <!-- Customer Form Modal -->
+        <!-- Customer Modal -->
+        <div id="customer-modal" class="modal modal-hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Rental Information</h3>
+                    <span class="close-modal customer-close" title="Close">
+                        <i class="bx bx-x"></i>
+                    </span>
+                </div>                <div class="modal-body">
+                    <form id="customer-form" autocomplete="off">                        <!-- Order Summary -->
+                        <div class="form-section">
+                            <h4>Order Summary</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="client-product-code">Products</label>
+                                    <textarea id="client-product-code" readonly rows="2" placeholder="No products selected"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="client-additional-code">Additional Items</label>
+                                    <textarea id="client-additional-code" readonly rows="2" placeholder="No additional items"></textarea>
+                                </div>
+                            </div>
+                            <div class="order-total-row">
+                                <span>Total:</span>
+                                <span id="client-rental-fee-display">₱0.00</span>
+                            </div>
+                            <!-- Hidden rental fee field for Firebase -->
+                            <input type="hidden" id="client-rental-fee" />
+                        </div><!-- Customer Information -->
+                        <div class="form-section">
+                            <h4>Customer Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="client-full-name">Name</label>
+                                    <input type="text" id="client-full-name" required />
+                                </div>
+                                <div class="form-group">
+                                    <label for="client-contact">Contact</label>
+                                    <input type="text" id="client-contact" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="client-region">Region</label>
+                                    <select id="client-region" required></select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="client-city">City</label>
+                                    <select id="client-city" required></select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group form-group-span-all">
+                                    <label for="client-address">Address</label>
+                                    <input type="text" id="client-address" required />
+                                </div>
+                            </div>
+                        </div>                        <!-- Rental Details -->
+                        <div class="form-section">
+                            <h4>Rental Details</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="rental-type">Rental Type</label>
+                                    <select id="rental-type" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Open Rental">Open Rental</option>
+                                        <option value="Fixed Rental">Fixed Rental</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-type">Event Type</label>
+                                    <select id="event-type" required>
+                                        <option value="">Select Event</option>
+                                        <option value="Sagala">Sagala</option>
+                                        <option value="Grad Ball">Grad Ball</option>
+                                        <option value="Debut">Debut</option>
+                                        <option value="Prom">Prom</option>
+                                        <option value="Other Indoor Events">Other Indoor Events</option>
+                                        <option value="Other Outdoor Events">Other Outdoor Events</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Open Rental Dates -->
+                            <div class="form-row open-rental-dates-hidden" id="open-rental-dates-wrapper">
+                                <div class="form-group">
+                                    <label for="event-start-date">Start Date</label>
+                                    <input type="date" id="event-start-date" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="event-end-date">End Date</label>
+                                    <input type="date" id="event-end-date" />
+                                </div>
+                            </div>
+
+                            <!-- Fixed Rental Date -->
+                            <div class="form-row" id="fixed-details-row">
+                                <div class="form-group" id="fixed-event-date-wrapper">
+                                    <label for="fixed-event-date">Start Date</label>
+                                    <input type="date" id="fixed-event-date" />
+                                </div>
+                                <div class="form-group"></div>
+                            </div>
+                        </div>
+
+                        <!-- Payment Information -->
+                        <div class="form-section">
+                            <h4>Payment Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="payment-method">Payment Method</label>
+                                    <select id="payment-method" required>
+                                        <option value="">Select Method</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Gcash">GCash</option>
+                                        <option value="Maya">Maya</option>
+                                        <option value="GoTyme">GoTyme</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="payment-status">Payment Status</label>
+                                    <select id="payment-status" required>
+                                        <option value="">Select Status</option>
+                                        <option value="Full Payment">Full Payment</option>
+                                        <option value="Down Payment">Down Payment</option>
+                                    </select>
+                                </div>
+                            </div>
+                              
+                            <!-- Digital Payment Fields -->
+                            <div class="form-row digital-payment-hidden" id="digital-payment-fields">
+                                <div class="form-group">
+                                    <label for="reference-no">Reference Number</label>
+                                    <input type="text" id="reference-no" />
+                                </div>
+                                <div class="form-group">
+                                    <label>&nbsp;</label> <!-- Empty label for alignment -->
+                                    <div class="payment-warning">⚠️ Verify payment before confirming rental</div>
+                                </div>
+                            </div>                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="total-payment">Total Payment</label>
+                                    <input type="number" id="total-payment" min="0" step="0.01" required />
+                                    <!-- Change display for cash payments -->
+                                    <div id="cash-change-display" class="cash-change-text cash-change-display-hidden"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="remaining-balance">Remaining Balance</label>
+                                    <input type="number" id="remaining-balance" readonly />
+                                </div>
+                            </div>                            <!-- Additional Fee Section -->
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="additional-fee-description">Fee Type</label>                                    <div class="additional-fee-input-container">
+                                        <input type="text" id="additional-fee-description" placeholder="e.g., Deposit Fee, Repair Fee, etc." readonly class="additional-fee-input" />
+                                        <button type="button" id="clear-fee-btn" class="clear-fee-btn" title="Clear Fee">×</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="additional-fee-amount">Additional Fee Amount (₱)</label>
+                                    <input type="number" id="additional-fee-amount" min="0" step="0.01" placeholder="0.00" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="form-section">
+                            <h4>Additional Information</h4>
+                            <div class="form-group">
+                                <label for="client-notes">Notes / Repair Instructions</label>
+                                <textarea id="client-notes" rows="2" placeholder="Enter any additional notes or repair instructions"></textarea>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="customer-form-submit">
+                            Submit Rental
+                        </button>
+                    </form></div>
+            </div>
+        </div>
+            </div>        </main>        <!-- Add Fee Modal -->
+        <div id="add-fee-modal" class="modal modal-hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Add Fee</h3>
+                    <span class="close-modal add-fee-close" title="Close">
+                        <i class="bx bx-x"></i>
+                    </span>
+                </div>
+                <div class="modal-body">
+                    <form id="add-fee-form">
+                        <div class="form-group">
+                            <label for="fee-type">Fee Type</label>
+                            <select id="fee-type" required>
+                                <option value="">Select Fee Type</option>
+                                <option value="Deposit">Deposit Fee</option>
+                                <option value="Repair">Repair Fee</option>
+                                <option value="Other">Other Fee</option>
+
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fee-amount">Amount (₱)</label>
+                            <input type="number" id="fee-amount" placeholder="0.00" min="1" step="0.01" required />
+                        </div>
+                        <div class="modal-actions">
+                            <button type="button" class="cancel-btn" id="cancel-add-fee-btn">Cancel</button>
+                            <button type="submit" class="add-btn" id="submit-add-fee-btn">Add Fee</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Bottom Navigation (hidden on desktop) -->        <nav class="mobile-bottom-nav">
+            <a href="./dashboard.html" class="mobile-nav-item">
+                <i class="bx bxs-dashboard icon"></i>
+                <span class="text">Dashboard</span>
+            </a>
+            <a href="./analytics.html" class="mobile-nav-item">
+                <i class="bx bxs-bar-chart-alt-2 icon"></i>
+                <span class="text">Analytics</span>
+            </a>
+            <a href="./inventory.html" class="mobile-nav-item">
+                <i class="bx bxs-t-shirt icon"></i>
+                <span class="text">Inventory</span>
+            </a>
+            <a href="./calendar.html" class="mobile-nav-item">
+                <i class="bx bxs-calendar icon"></i>
+                <span class="text">Calendar</span>
+            </a>
+            <a href="./rental.html" class="mobile-nav-item active">
+                <i class="bx bxs-package icon"></i>
+                <span class="text">Rental</span>
+            </a>
+            <a href="./customer-logs.html" class="mobile-nav-item">
+                <i class="bx bxs-user icon"></i>
+                <span class="text">Logs</span>
+            </a>
+            <a href="./settings.html" class="mobile-nav-item">
+                <i class="bx bxs-cog icon"></i>
+                <span class="text">Settings</span>
+            </a>
+        </nav>
+
+        <!-- NOTYF CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>        <!-- JQUERY JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"        ></script>
+            
+        <!-- Admin Layout - Must be loaded before page-specific scripts -->
+        <script src="./assets/js/admin-layout.js"></script>
+
+        <!-- Auth Guard - Must be loaded early -->
+        <script type="module" src="./assets/js/auth-guard.js"></script>
+        
+        <!-- EXTERNAL SCRIPT -->
+        <script src="./assets/js/admin-layout-mob.js"></script>
+        <script type="module" src="./assets/js/rental-service.js"></script>
+        <script type="module" src="./assets/js/rental-subscript.js"></script>
+    </body>
+</html>

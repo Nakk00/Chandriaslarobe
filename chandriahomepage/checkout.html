@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!--=============== FLATICON ===============-->
+        <link
+            rel="stylesheet"
+            href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css"
+        />
+
+        <!--=============== SWIPER CSS ===============-->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
+
+        <!-- NOTYF CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />
+        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="assets/css/nav-bar.css" />
+        <link rel="stylesheet" href="assets/css/hamburger-mob.css" />
+        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="./assets/css/checkout.css" />
+        <link rel="stylesheet" href="assets/css/auth-modal.css" />
+        <link rel="stylesheet" href="assets/css/spinner.css" />
+        <link rel="stylesheet" href="assets/css/chatbot.css" />
+        <link rel="stylesheet" href="assets/css/terms-conditions.css" />
+        
+        <title>Chandria's La Robe</title>
+    </head>
+    <body>
+        <!-- Page Loading Spinner -->
+        <div id="page-spinner" class="page-spinner">
+            <div class="spinner-content">
+                <div class="spinner-ring-container">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="spinner-text">Loading details for appointment booking...</p>
+            </div>
+        </div>
+
+        <!--=============== HEADER ===============-->
+        <header class="header">
+            <nav class="nav container">
+                <a href="../index.html" class="nav-logo">
+                    <img
+                        src="assets/img/logo1.png"
+                        alt=""
+                        class="nav-logo-img"
+                    />
+                </a>
+
+                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#categories" class="nav-link">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="shop.html" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#contact" class="nav-link">About</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="header-user-actions">
+                    <!-- Mobile Hamburger Menu -->
+                    <div class="hamburger-menu" id="hamburger-menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>
+
+                    <a href="wishlist.html" class="header-action-btn">
+                        <img src="assets/img/icon-heart.svg" alt="" />
+                        <span class="count" id="wishlist-count">0</span>
+                    </a>
+
+                    <a href="cart.html" class="header-action-btn">
+                        <img src="assets/img/icon-cart.svg" alt="" />
+                        <span class="count" id="cart-count">0</span>
+                    </a>
+                    <button class="header-action-btn" onclick="window.profileNavService?.handleAccountClick() || handleAccountClick()" id="account-btn">
+                        <img src="assets/img/icon-user.svg" alt="" />
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="../index.html" class="mobile-nav-link">Home</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#categories" class="mobile-nav-link">Categories</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="shop.html" class="mobile-nav-link">Shop</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#reviews" class="mobile-nav-link">Reviews</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#contact" class="mobile-nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!--=============== MAIN ===============-->
+        <main class="main">
+            <!--=============== CHECKOUT ===============-->
+            <section class="checkout section-lg">
+                <h3 class="checkout-section-title">Appointment Details</h3>
+                <div class="checkout-container container grid">
+                    <div class="checkout-group">
+                        <form class="form grid" id="checkout-form">
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                class="form-input"
+                                id="customer-name"
+                                readonly
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                class="form-input"
+                                id="customer-email"
+                                readonly
+                            />
+                            <input
+                                type="tel"
+                                placeholder="Phone No."
+                                class="form-input"
+                                id="customer-contact"
+                                readonly
+                                required
+                            />
+                            <input
+                                type="date"
+                                placeholder="Date"
+                                class="form-input"
+                                id="checkout-date"
+                            />
+                            <input
+                                type="time"
+                                placeholder="Time"
+                                class="form-input"
+                                id="checkout-time"
+                            />
+
+                            <textarea
+                                name=""
+                                placeholder="Any special requests or notes..."
+                                cols="30"
+                                rows="10"
+                                class="form-input textarea"
+                                id="customer-request"
+                            ></textarea>
+                        </form>
+                    </div>
+
+                    <div class="checkout-group">
+                        <table class="order-table">
+                            <tr>
+                                <th colspan="2">Products</th>
+                                <th>Total</th>
+                            </tr>
+                            <tbody id="checkout-cart">
+                                <tr>
+                                    <td>
+                                        <img
+                                            src="assets/img/product-6-1.jpg"
+                                            alt=""
+                                            class="order-img"
+                                        />
+                                    </td>
+
+                                    <td>
+                                        <h3 class="table-title">
+                                            Colorful Pattern Shirt
+                                        </h3>
+                                        <p class="table-quantity">x 1</p>
+                                    </td>
+
+                                    <td>
+                                        <span class="table-price"
+                                            >₱ 900.00</span
+                                        >
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                            <tr>
+                                <td>
+                                    <span class="order-subtitle">Total</span>
+                                </td>
+
+                                <td colspan="2">
+                                    <span class="order-grand-total"
+                                        >₱ 2700.00</span
+                                    >
+                                </td>
+                            </tr>
+                        </table>
+                        
+                        <div class="place-rent">
+                            <button class="btn btn-primary" id="place-rent-btn">
+                                <i class="fi fi-rs-shopping-bag"></i> Book Appointment
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!--=============== TERMS AND CONDITIONS MODAL ===============-->
+        <div id="terms-modal" class="terms-modal-overlay">
+            <div class="terms-modal-container">
+                <div class="terms-modal-header">
+                    <h2 class="terms-modal-title">TERMS AND CONDITIONS OF SERVICE</h2>
+                    <button class="terms-modal-close" id="terms-close">&times;</button>
+                </div>
+                
+                <div class="terms-scroll-indicator">
+                    <div class="terms-scroll-progress"></div>
+                </div>
+                
+                <div class="terms-modal-content">
+                    <p class="legal-notice">Last Updated: June 15, 2025</p>
+                    
+                    <p>This Agreement ("Agreement") constitutes a legally binding contract between you ("Customer", "you", or "your") and Chandria's La Robe ("Company", "we", "our", or "us") regarding your rental of products through our booking service. Please read these terms carefully before confirming your appointment.</p>
+                    
+                    <h3 class="section-title">1. APPOINTMENT BOOKING</h3>
+                    <p>1.1. This appointment booking is for fitting and reservation purposes only. No payment is required at the time of online booking.</p>
+                    <p>1.2. By confirming this appointment, you are expressing interest in renting the selected items, which will be prepared for you to try on at our physical location.</p>
+                    <p>1.3. The Company reserves the right to reschedule or cancel appointments due to unforeseen circumstances, with reasonable notice provided to the Customer.</p>
+                    
+                    <h3 class="section-title">2. RENTAL POLICIES</h3>
+                    <p>2.1. <strong>Late Returns:</strong> For each day an item is returned after the agreed-upon return date, a late fee equal to the daily rental price of the item will be automatically charged.</p>
+                    <p>2.2. <strong>Rental Period:</strong> The rental period begins on the day the items are collected from our store and ends on the agreed return date specified in the rental agreement signed at our physical location.</p>
+                    <p>2.3. <strong>Extensions:</strong> Extensions to the rental period must be requested and approved at least 24 hours before the original return date and are subject to availability.</p>
+                    
+                    <h3 class="section-title">3. PAYMENT TERMS</h3>
+                    <p>3.1. <strong>Down Payment:</strong> Any down payment made at our physical store is strictly non-refundable under any circumstances.</p>
+                    <p>3.2. <strong>Security Deposit:</strong> A security deposit of 50% of the total rental price is required to ensure the safety and return of all items. This deposit will be refunded upon the timely return of undamaged items in their original condition.</p>
+                    <p>3.3. <strong>Payment Methods:</strong> We accept cash, credit cards, and approved digital payment methods at our physical location.</p>
+                    
+                    <div class="highlight">
+                        <p>IMPORTANT: All financial transactions including payment collection and security deposits will occur only at our physical store location. No online payment is required at the time of booking an appointment.</p>
+                    </div>
+                    
+                    <h3 class="section-title">4. DAMAGES AND LIABILITY</h3>
+                    <p>4.1. <strong>Additional Fees:</strong> The Customer will be responsible for additional fees for any items that are damaged, broken, stained, or lost during the rental period. These fees may include:</p>
+                    <ul>
+                        <li>Repair costs for minor damages</li>
+                        <li>Full replacement value for major damages or lost items</li>
+                        <li>Cleaning fees for stains or soiling beyond normal wear</li>
+                    </ul>
+                    <p>4.2. <strong>Assessment:</strong> The Company reserves the sole right to determine the condition of returned items and assess any applicable damage fees.</p>
+                    <p>4.3. <strong>Insurance:</strong> Customers are advised to check if their personal insurance policies might cover damage to rented items.</p>
+                    
+                    <h3 class="section-title">5. CANCELLATION POLICY</h3>
+                    <p>5.1. Appointments may be cancelled or rescheduled at least 24 hours in advance without penalty.</p>
+                    <p>5.2. Repeated no-shows may result in restrictions on future bookings.</p>
+                    
+                    <h3 class="section-title">6. GENERAL PROVISIONS</h3>
+                    <p>6.1. <strong>Alterations:</strong> Customers shall not make any alterations to the rented items without prior written consent from the Company.</p>
+                    <p>6.2. <strong>Care Instructions:</strong> Customers agree to follow all care instructions provided for the rented items.</p>
+                    <p>6.3. <strong>Limitation of Liability:</strong> The Company's liability shall be limited to the rental fee paid by the Customer.</p>
+                    
+                    <p class="date">By checking the box below, you acknowledge that you have read, understood, and agree to be bound by all the terms and conditions outlined in this Agreement.</p>
+                    
+                    <div class="terms-agreement">
+                        <input type="checkbox" id="terms-checkbox">
+                        <label for="terms-checkbox">I have read, understood, and agree to the Terms and Conditions of Chandria's La Robe rental services.</label>
+                    </div>
+                </div>
+                
+                <div class="terms-modal-actions">
+                    <button class="terms-btn-cancel" id="terms-cancel">Cancel</button>
+                    <button class="terms-btn-agree" id="terms-agree" disabled>Confirm Booking</button>
+                </div>
+            </div>
+        </div>
+
+        <!-------------------------------- MODERN AUTHENTICATION MODAL -------------------------------->
+        <div id="auth-modal" class="auth-modal-container">
+            <div class="auth-modal">
+                <button class="auth-close">&times;</button>
+                
+                <div class="auth-content">
+                    <!-- Image Section -->
+                    <div class="auth-image-section">
+                        <img src="assets/img/authenimage.jpg" alt="Chandria's La Robe" class="auth-image">
+                        <div class="auth-image-overlay"></div>
+                        <div class="auth-brand">
+                            <img src="assets/img/logo1.png" alt="Logo" class="auth-logo">
+                            <h3>Welcome to Chandria's La Robe</h3>
+                            <p>Your premier destination for elegant rentals</p>
+                        </div>
+                    </div>
+
+                    <!-- Form Section -->
+                    <div class="auth-form-section">
+                        <!-- Sign In Form -->
+                        <form id="signin-form" class="auth-form active">
+                            <div class="auth-header">
+                                <h2>Welcome Back</h2>
+                                <p>Sign in to your account to continue</p>
+                            </div>
+
+                            <div class="auth-form-content">
+                                <div class="auth-input-group">
+                                    <label for="signin-email">Email Address</label>
+                                    <input type="email" id="signin-email" placeholder="Enter your email" required>
+                                </div>
+
+                                <div class="auth-input-group">
+                                    <label for="signin-password">Password</label>
+                                    <input type="password" id="signin-password" placeholder="Enter your password" required>
+                                </div>
+
+                                <div class="auth-forgot">
+                                    <a href="#" onclick="showForgotPassword()">Forgot Password?</a>
+                                </div>
+
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Sign In
+                                </button>
+
+                                <div class="auth-divider">
+                                    <span>or continue with</span>
+                                </div>                                <div class="auth-social">
+                                    <button type="button" class="auth-social-btn google-btn" id="google-signin" title="Sign in with Google">
+                                        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                                            <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                                            <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                                            <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                                        </svg>
+                                        <span>Continue with Google</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="auth-switch">
+                                <span>Don't have an account?</span>
+                                <a href="#" onclick="showSignup()">Sign up</a>
+                            </div>
+                        </form>
+
+                        <!-- Sign Up Form -->
+                        <form id="signup-form" class="auth-form">
+                            <div class="auth-header">
+                                <h2>Create Account</h2>
+                                <p>Join us to access exclusive features</p>
+                            </div>
+
+                            <div class="auth-form-content">
+                                <div class="auth-input-row">
+                                    <div class="auth-input-group">
+                                        <label for="signup-firstname">First Name</label>
+                                        <input type="text" id="signup-firstname" placeholder="First name" required>
+                                    </div>
+                                    <div class="auth-input-group">
+                                        <label for="signup-lastname">Last Name</label>
+                                        <input type="text" id="signup-lastname" placeholder="Last name" required>
+                                    </div>
+                                </div>
+
+                                <div class="auth-input-group">
+                                    <label for="signup-email">Email Address</label>
+                                    <input type="email" id="signup-email" placeholder="Enter your email" required>
+                                </div>
+
+                                <div class="auth-input-group">
+                                    <label for="signup-phone">Phone Number</label>
+                                    <input type="tel" id="signup-phone" placeholder="Enter your phone number" required>
+                                </div>
+
+                                <div class="auth-input-group">
+                                    <label for="signup-password">Password</label>
+                                    <input type="password" id="signup-password" placeholder="Create a password" required>
+                                </div>
+
+                                <div class="auth-input-group">
+                                    <label for="signup-confirm">Confirm Password</label>
+                                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
+                                </div>
+
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Create Account
+                                </button>
+
+                                <div class="auth-divider">
+                                    <span>or continue with</span>
+                                </div>                                <div class="auth-social">
+                                    <button type="button" class="auth-social-btn google-btn" id="google-signin" title="Sign in with Google">
+                                        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                                            <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                                            <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                                            <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                                        </svg>
+                                        <span>Continue with Google</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="auth-switch">
+                                <span>Already have an account?</span>
+                                <a href="#" onclick="showSignin()">Sign in</a>
+                            </div>
+                        </form>
+
+                        <!-- Forgot Password Form -->
+                        <form id="forgot-form" class="auth-form">
+                            <div class="auth-header">
+                                <h2>Reset Password</h2>
+                                <p>Enter your email to receive reset instructions</p>
+                            </div>
+
+                            <div class="auth-form-content">
+                                <div class="auth-input-group">
+                                    <label for="forgot-email">Email Address</label>
+                                    <input type="email" id="forgot-email" placeholder="Enter your email" required>
+                                </div>
+
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Send Reset Link
+                                </button>
+                            </div>
+
+                            <div class="auth-switch">
+                                <span>Remember your password?</span>
+                                <a href="#" onclick="showSignin()">Sign in</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--=============== SWIPER JS ===============-->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <!-- NOTYF CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <!-- JQUERY JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>
+        <!--=============== EXTERNAL SCRIPT ===============-->
+        <script src="./assets/js/hamburger-mob.js"></script>
+        <script src="./assets/js/spinner/spinner-core.js"></script>
+        <script src="./assets/js/spinner/spinner-page.js"></script>
+        <script src="./assets/js/spinner/spinner-utils.js"></script>
+        <script src="./assets/js/quick-view/quick-view.js"></script>
+        <script src="./assets/js/nav-bar.js"></script>
+        <script type="module" src="./assets/js/profile-nav-service.js"></script>
+        <script type="module" src="./assets/js/wishlist-firebase.js"></script>
+        <script type="module" src="assets/js/auth-modal.js"></script>
+        <script type="module" src="./assets/js/checkout.js"></script>
+        <script type="module" src="./assets/js/chatbot/chatbot-init.js"></script>
+        <!-- Clockpicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clockpicker/0.0.7/bootstrap-clockpicker.min.js"></script>
+    </body>
+</html>

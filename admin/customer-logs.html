@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    <title>Chandria's La Robe - Rental History</title>
+      <!-- EXTERNAL CSS -->    <link rel="stylesheet" href="./assets/css/admin-layout.css" />
+    <link rel="stylesheet" href="./assets/css/admin-layout-mob.css" />
+    <link rel="stylesheet" href="./assets/css/customer-logs.css" />
+    <link rel="stylesheet" href="./assets/css/customer-logs-modal.css" />
+    <link rel="stylesheet" href="./assets/css/status-colors.css" />
+    <link rel="stylesheet" href="./assets/css/spinners-admin.css" />
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>    <!-- Notyf CSS and JS for notifications -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script>
+        // Initialize Notyf globally
+        window.notyf = new Notyf({
+            duration: 4000,
+            position: {
+                x: 'right',
+                y: 'top'
+            },
+            dismissible: true
+        });
+    </script>
+</head>
+
+<body>    <!-- Page Loader -->
+    <div class="admin-page-loader">
+        <div class="admin-spinner-with-text">
+            <div class="admin-page-spinner"></div>
+            <div class="admin-spinner-text">Loading Customer Logs...</div>
+        </div>
+    </div>
+
+    <!-- Action Spinner -->
+    <div class="admin-action-spinner">
+        <div class="admin-spinner-with-text">
+            <div class="admin-spinner"></div>
+            <div class="admin-spinner-text">Processing...</div>
+        </div>
+    </div>
+
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="./assets/images/chandriaslogo.png" alt="logo">
+                </span>
+                </div>
+
+
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+
+                <ul class="menu-links">                    <li class="nav-link">
+                        <a href="./dashboard.html">
+                            <i class='bx bxs-dashboard icon'></i>
+                            <span class="text nav-text">Dashboard</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./analytics.html">
+                            <i class='bx bxs-bar-chart-alt-2 icon'></i>
+                            <span class="text nav-text">Analytics</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./inventory.html">
+                            <i class='bx bxs-t-shirt icon'></i>
+                            <span class="text nav-text">Inventory</span>
+                        </a>
+                        <!-- <i class='bx bxs-chevron-down'></i> -->
+                    </li>
+
+                    <li class="nav-link">
+                            <a href="./calendar.html">
+                                <i class="bx bxs-calendar icon"></i>
+                                <span class="text nav-text"
+                                    >Calendar</span
+                                >
+                            </a>
+                        </li>
+
+                    <li class="nav-link">
+                        <a href="./rental.html">
+                            <i class='bx bxs-package icon'></i>
+                            <span class="text nav-text">Rental</span>
+                        </a>
+                    </li>                    <li class="nav-link active">
+                        <a href="#">
+                            <i class='bx bxs-user icon'></i>
+                            <span class="text nav-text">Logs History</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-link">
+                        <a href="./settings.html">
+                            <i class="bx bxs-cog icon"></i>
+                            <span class="text nav-text"
+                                >Settings</span
+                            >
+                        </a>
+                    </li>
+
+                    <!-- <li class="nav-link">
+                        <a href="#">
+                            <i class='bx bxs-wallet icon'></i>
+                            <span class="text nav-text">Transaction</span>
+                        </a>
+                    </li> -->
+
+                </ul>
+            </div>
+
+            <div class="bottom-content">
+            </div>
+
+        </div>    </nav>
+
+    <main class="main-content">        <header class="page-header">
+            <div class="header-left">
+                <h1 class="page-title">Rental History</h1>
+                <p class="page-subtitle">View and manage all rental transactions and appointment history</p>
+            </div>        </header>
+        
+        <div class="page-content">
+            <div class="transactions-container">
+                <div class="transactions-header">
+                    <div class="header-info">
+                        <h3>All Transactions</h3>
+                        <span class="transaction-count" id="transaction-count">0</span>
+                    </div>
+                    
+                    <!-- Desktop: Search and Sort controls inline with view toggle -->
+                    <div class="header-controls desktop-controls">                        <div class="search-box">
+                            <i class='bx bx-search icon'></i>
+                            <input type="text" placeholder="Search by customer, transaction..." id="search-input">
+                        </div>
+                        <button class="btn btn-primary" id="refresh-btn" title="Refresh data">
+                            <i class='bx bx-refresh'></i> Refresh
+                        </button>
+                        <div class="sort-dropdown">
+                            <button class="btn btn-secondary" id="sort-btn">
+                                <i class='bx bx-sort'></i> Sort
+                                <i class='bx bx-chevron-down'></i>
+                            </button>
+                            <div class="sort-options" id="sort-options">
+                                <div class="sort-option" data-sort="name-asc">
+                                    <i class='bx bx-sort-a-z'></i> Name (A-Z)
+                                </div>
+                                <div class="sort-option" data-sort="name-desc">
+                                    <i class='bx bx-sort-z-a'></i> Name (Z-A)
+                                </div>
+                                <div class="sort-option" data-sort="recent">
+                                    <i class='bx bx-time-five'></i> Recent (Newest First)
+                                </div>
+                                <div class="sort-option" data-sort="oldest">
+                                    <i class='bx bx-time'></i> Oldest First
+                                </div>
+                                <div class="sort-option" data-sort="event-asc">
+                                    <i class='bx bx-calendar'></i> Event Date (Earliest)
+                                </div>
+                                <div class="sort-option" data-sort="event-desc">
+                                    <i class='bx bx-calendar-check'></i> Event Date (Latest)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="cards" id="card-view-btn">
+                            <i class='bx bx-grid-alt'></i> Cards
+                        </button>
+                        <button class="view-btn" data-view="table" id="table-view-btn">
+                            <i class='bx bx-table'></i> Table
+                        </button>
+                    </div>
+                </div>
+                  <!-- Mobile: Search and Sort controls stacked -->
+                <div class="header-controls mobile-controls">
+                    <div class="search-box">
+                        <i class='bx bx-search icon'></i>
+                        <input type="text" placeholder="Search by customer, transaction..." id="search-input-mobile">
+                    </div>
+                    <div class="mobile-buttons">
+                        <button class="btn btn-primary" id="refresh-btn-mobile" title="Refresh data">
+                            <i class='bx bx-refresh'></i> Refresh
+                        </button>                        <div class="sort-dropdown">
+                            <button class="btn btn-secondary" id="sort-btn-mobile">
+                                <i class='bx bx-sort'></i> Sort
+                                <i class='bx bx-chevron-down'></i>
+                            </button>
+                            <div class="sort-options" id="sort-options-mobile">
+                                <div class="sort-option" data-sort="name-asc">
+                                    <i class='bx bx-sort-a-z'></i> Name (A-Z)
+                                </div>
+                                <div class="sort-option" data-sort="name-desc">
+                                    <i class='bx bx-sort-z-a'></i> Name (Z-A)
+                                </div>
+                                <div class="sort-option" data-sort="recent">
+                                    <i class='bx bx-time-five'></i> Recent (Newest First)
+                                </div>
+                                <div class="sort-option" data-sort="oldest">
+                                    <i class='bx bx-time'></i> Oldest First
+                                </div>
+                                <div class="sort-option" data-sort="event-asc">
+                                    <i class='bx bx-calendar'></i> Event Date (Earliest)
+                                </div>
+                                <div class="sort-option" data-sort="event-desc">
+                                    <i class='bx bx-calendar-check'></i> Event Date (Latest)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <!-- Card View -->
+                <div class="cards-container" id="cards-container">
+                    <div class="transaction-cards" id="transaction-cards">
+                        <!-- Cards will be populated by JavaScript -->
+                    </div>
+                </div>
+                
+                <!-- Table View -->
+                <div class="table-container" id="table-container">
+                    <div class="table-wrapper">
+                        <table id="rental-history-table">
+                            <thead>
+                                <tr>
+                                    <th>Customer Name</th>
+                                    <th>Transaction Code</th>
+                                    <th>Event Date</th>
+                                    <th>Rental Status</th>
+                                    <th>Total Amount</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>                            <tbody id="rental-history-tbody">
+                                <!-- Table rows will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <!-- Transaction Details Modal -->
+    <div id="transaction-details-modal" class="modal-overlay">
+        <div class="modal-content transaction-details-content">
+            <div class="modal-header">
+                <h2><i class='bx bx-receipt'></i> Transaction Details</h2>
+                <button class="close-btn" onclick="closeTransactionDetailsModal()">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body" id="transaction-details-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Transaction Modal -->
+    <div id="edit-modal" class="modal-overlay">
+        <div class="modal-content edit-modal-content">
+            <div class="modal-header">
+                <h2>Edit Transaction</h2>
+                <button class="close-btn" onclick="closeEditModal()">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="edit-transaction-form">
+                    <div class="form-section">
+                        <h3>Customer Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="edit-fullName">Full Name *</label>
+                                <input type="text" id="edit-fullName" name="fullName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-contactNumber">Contact Number *</label>
+                                <input type="tel" id="edit-contactNumber" name="contactNumber" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-address">Address</label>
+                                <input type="text" id="edit-address" name="address">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-city">City</label>
+                                <input type="text" id="edit-city" name="city">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-region">Region</label>
+                                <input type="text" id="edit-region" name="region">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Event Details</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="edit-eventType">Event Type</label>
+                                <input type="text" id="edit-eventType" name="eventType">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-rentalType">Rental Type</label>
+                                <select id="edit-rentalType" name="rentalType">
+                                    <option value="Fixed Rental">Fixed Rental</option>
+                                    <option value="Open Rental">Open Rental</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-eventStartDate">Event Start Date</label>
+                                <input type="date" id="edit-eventStartDate" name="eventStartDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-eventEndDate">Event End Date</label>
+                                <input type="date" id="edit-eventEndDate" name="eventEndDate">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Payment Information</h3>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="edit-paymentMethod">Payment Method</label>
+                                <select id="edit-paymentMethod" name="paymentMethod">
+                                    <option value="Cash">Cash</option>
+                                    <option value="GCash">GCash</option>
+                                    <option value="PayMaya">PayMaya</option>
+                                    <option value="Bank Transfer">Bank Transfer</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-paymentType">Payment Type</label>
+                                <select id="edit-paymentType" name="paymentType">
+                                    <option value="Full Payment">Full Payment</option>
+                                    <option value="Partial Payment">Partial Payment</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-rentalFee">Rental Fee</label>
+                                <input type="number" id="edit-rentalFee" name="rentalFee" step="0.01" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-totalPayment">Total Payment</label>
+                                <input type="number" id="edit-totalPayment" name="totalPayment" step="0.01" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-remainingBalance">Remaining Balance</label>
+                                <input type="number" id="edit-remainingBalance" name="remainingBalance" step="0.01" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="edit-referenceNo">Reference Number</label>
+                                <input type="text" id="edit-referenceNo" name="referenceNo">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Additional Notes</h3>
+                        <div class="form-group">
+                            <label for="edit-notes">Notes</label>
+                            <textarea id="edit-notes" name="notes" rows="3"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeEditModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">
+                            <i class='bx bx-save'></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal-overlay">
+        <div class="modal-content delete-modal-content">
+            <div class="modal-header delete-header">
+                <h2><i class='bx bx-error-circle'></i> Confirm Deletion</h2>
+                <button class="close-btn" onclick="closeDeleteModal()">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-section">
+                    <div class="warning-icon">
+                        <i class='bx bx-error-circle'></i>
+                    </div>
+                    <div class="warning-content">
+                        <h3>⚠️ WARNING: This action cannot be undone!</h3>
+                        <p>You are about to permanently delete this transaction. This will:</p>
+                        <ul class="warning-list">
+                            <li>Remove all customer information</li>
+                            <li>Delete rental history records</li>
+                            <li>Remove payment information</li>
+                            <li>Clear all associated data</li>
+                        </ul>
+                        <p class="final-warning">
+                            <strong>This data will be FOREVER GONE and cannot be recovered!</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="transaction-summary">
+                    <h4>Transaction to be deleted:</h4>
+                    <div class="summary-content">
+                        <p><strong>Customer:</strong> <span id="delete-customer-name">-</span></p>
+                        <p><strong>Transaction Code:</strong> <span id="delete-transaction-code">-</span></p>
+                        <p><strong>Event Date:</strong> <span id="delete-event-date">-</span></p>
+                        <p><strong>Total Amount:</strong> <span id="delete-total-amount">-</span></p>
+                    </div>
+                </div>
+                
+                <div class="confirmation-section">
+                    <p>Type <strong>DELETE</strong> to confirm:</p>
+                    <input type="text" id="delete-confirmation-input" placeholder="Type DELETE to confirm" class="confirmation-input">
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeDeleteModal()">
+                        <i class='bx bx-x'></i> Cancel
+                    </button>
+                    <button type="button" class="btn-danger" id="confirm-delete-btn" disabled onclick="confirmDelete()">
+                        <i class='bx bx-trash'></i> DELETE FOREVER
+                    </button>
+                </div>
+            </div>        </div>
+            </div>        </main>        <!-- Mobile Bottom Navigation (hidden on desktop) -->        <nav class="mobile-bottom-nav">
+            <a href="./dashboard.html" class="mobile-nav-item">
+                <i class="bx bxs-dashboard icon"></i>
+                <span class="text">Dashboard</span>
+            </a>
+            <a href="./analytics.html" class="mobile-nav-item">
+                <i class="bx bxs-bar-chart-alt-2 icon"></i>
+                <span class="text">Analytics</span>
+            </a>
+            <a href="./inventory.html" class="mobile-nav-item">
+                <i class="bx bxs-t-shirt icon"></i>
+                <span class="text">Inventory</span>
+            </a>
+            <a href="./calendar.html" class="mobile-nav-item">
+                <i class="bx bxs-calendar icon"></i>
+                <span class="text">Calendar</span>
+            </a>
+            <a href="./rental.html" class="mobile-nav-item">
+                <i class="bx bxs-package icon"></i>
+                <span class="text">Rental</span>
+            </a>
+            <a href="./customer-logs.html" class="mobile-nav-item active">
+                <i class="bx bxs-user icon"></i>
+                <span class="text">Logs</span>
+            </a>
+            <a href="./settings.html" class="mobile-nav-item">
+                <i class="bx bxs-cog icon"></i>
+                <span class="text">Settings</span>
+            </a>
+        </nav>
+      <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    
+    <!-- Auth Guard - Must be loaded early -->
+    <script type="module" src="./assets/js/auth-guard.js"></script>
+    
+      <!-- EXTERNAL SCRIPT -->
+    <script src="./assets/js/spinners-admin.js"></script><script src="./assets/js/admin-layout.js"></script>
+    <script src="./assets/js/admin-layout-mob.js"></script>
+    
+    <!-- Modal Script (load before main service) -->
+    <script type="module" src="./assets/js/customer-logs-modal.js"></script>
+    
+    <script type="module" src="./assets/js/customer-logs-service-new.js"></script>
+
+    <!-- Cancel Rental Confirmation Modal -->
+    <div id="cancel-rental-modal" class="modal-overlay">
+        <div class="modal-content delete-modal-content">
+            <div class="modal-header cancel-header">
+                <h2><i class='bx bx-error-circle'></i> Cancel Rental</h2>
+                <button class="close-btn" onclick="closeCancelRentalModal()">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="warning-section cancel-warning">
+                    <div class="warning-icon">
+                        <i class='bx bx-error-circle cancel-warning-icon'></i>
+                    </div>
+                    <div class="warning-content">
+                        <h3 class="cancel-warning-title">⚠️ Are you sure you want to cancel this rental?</h3>
+                        <p class="cancel-warning-text">This action will:</p>
+                        <ul class="warning-list cancel-warning-list">
+                            <li>Cancel the upcoming rental booking</li>
+                            <li>Free up the reserved items for other customers</li>
+                            <li>Change the rental status to "Cancelled"</li>
+                            <li>Record the cancellation date</li>
+                        </ul>
+                        <p class="final-warning cancel-final-warning">
+                            <strong>This action can be undone later if needed!</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="transaction-summary">
+                    <h4>Rental to be cancelled:</h4>
+                    <div class="summary-content">
+                        <p><strong>Customer:</strong> <span id="cancel-customer-name">-</span></p>
+                        <p><strong>Transaction Code:</strong> <span id="cancel-transaction-code">-</span></p>
+                        <p><strong>Event Date:</strong> <span id="cancel-event-date">-</span></p>
+                        <p><strong>Total Amount:</strong> <span id="cancel-total-amount">-</span></p>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeCancelRentalModal()">
+                        <i class='bx bx-x'></i> Keep Rental
+                    </button>                    <button type="button" class="btn-cancel" id="confirm-cancel-rental-btn" onclick="console.log('Cancel button clicked!'); confirmCancelRental();">
+                        <i class='bx bx-x-circle'></i> Cancel Rental
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Process Overdue Modal -->
+    <div id="process-overdue-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class='bx bx-time-five'></i> Process Overdue Rental</h2>
+                <button class="close-btn" onclick="closeProcessOverdueModal()">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-section">
+                    <div class="confirmation-icon overdue-icon">
+                        <i class='bx bx-error-circle'></i>
+                    </div>
+                    <div class="confirmation-content">
+                        <h3>⚠️ Process this overdue rental?</h3>
+                        <p>This rental is overdue and requires processing. You can:</p>
+                        <div class="overdue-options">
+                            <div class="overdue-option">
+                                <input type="radio" id="mark-completed" name="overdue-action" value="completed" checked>
+                                <label for="mark-completed">
+                                    <i class='bx bx-check-circle'></i>
+                                    <span>Mark as Completed</span>
+                                    <small>Items have been returned</small>
+                                </label>
+                            </div>                            <div class="overdue-option">
+                                <input type="radio" id="add-late-fee" name="overdue-action" value="late-fee">
+                                <label for="add-late-fee">
+                                    <i class='bx bx-money'></i>
+                                    <span>Add Late Fee & Complete</span>
+                                    <small>Apply penalty for late return</small>
+                                </label>
+                            </div>                        </div>
+                          <!-- Late Fee Section -->
+                        <div id="late-fee-section" class="fee-section fee-section-hidden">
+                            <h4>Late Fee Details</h4>
+                            <div class="fee-input-group">
+                                <label for="late-fee-amount">Fee Amount (₱)</label>
+                                <input type="number" id="late-fee-amount" min="0" step="0.01" placeholder="0.00">
+                            </div>
+                            <div class="fee-input-group">
+                                <label for="late-fee-reason">Reason</label>
+                                <select id="late-fee-reason">
+                                    <option value="late-return">Late Return</option>
+                                    <option value="damaged-item">Damaged Item</option>
+                                    <option value="missing-accessory">Missing Accessory</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transaction-summary">
+                    <h4>Overdue Rental Details:</h4>
+                    <div class="summary-content">
+                        <p><strong>Customer:</strong> <span id="overdue-customer-name">-</span></p>
+                        <p><strong>Transaction Code:</strong> <span id="overdue-transaction-code">-</span></p>
+                        <p><strong>Event Date:</strong> <span id="overdue-event-date">-</span></p>
+                        <p><strong>Days Overdue:</strong> <span id="overdue-days-count" class="overdue-count">-</span></p>
+                        <p><strong>Total Amount:</strong> <span id="overdue-total-amount">-</span></p>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeProcessOverdueModal()">
+                        <i class='bx bx-x'></i> Cancel
+                    </button>
+                    <button type="button" class="btn-primary" id="confirm-process-overdue-btn" onclick="confirmProcessOverdue()">
+                        <i class='bx bx-check'></i> Process Rental
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal-overlay modal-hidden">
+        <div class="success-modal-content">
+            <div class="success-modal-header">
+                <i class='bx bx-check-circle success-icon'></i>
+                <h3 id="success-modal-title">Success!</h3>
+            </div>
+            <div class="success-modal-body">
+                <p id="success-modal-message">Operation completed successfully.</p>
+            </div>
+            <div class="success-modal-footer">
+                <button type="button" class="btn-success-ok" onclick="closeSuccessModal()">
+                    <i class='bx bx-check'></i> OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Undo Cancellation Modal -->
+    <div id="undo-cancel-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class='bx bx-undo'></i> Undo Cancellation</h2>
+                <button class="close-btn" onclick="closeUndoCancelModal()">
+                    <i class='bx bx-x'></i>
+                </button>
+            </div>
+            <div class="modal-body">                <div class="confirmation-section">
+                    <div class="confirmation-icon undo-icon">
+                        <i class='bx bx-undo'></i>
+                    </div>
+                    <div class="confirmation-content">
+                        <h3>Restore this cancelled rental?</h3>
+                        <p>This will undo the cancellation and restore the rental to its appropriate status based on the event dates.</p>
+                    </div>
+                </div>
+                
+                <div class="transaction-summary">
+                    <h4>Rental Details:</h4>
+                    <div class="summary-content">
+                        <p><strong>Customer:</strong> <span id="undo-customer-name">-</span></p>
+                        <p><strong>Transaction Code:</strong> <span id="undo-transaction-code">-</span></p>
+                        <p><strong>Event Start Date:</strong> <span id="undo-event-start-date">-</span></p>
+                        <p><strong>Event End Date:</strong> <span id="undo-event-end-date">-</span></p>
+                        <p><strong>Total Amount:</strong> <span id="undo-total-amount">-</span></p>
+                    </div>
+                </div>
+
+                <div class="status-prediction">
+                    <h4>Predicted New Status:</h4>
+                    <div class="status-badge" id="predicted-status-badge">
+                        <span id="predicted-status-text">Calculating...</span>
+                    </div>
+                    <p class="status-explanation" id="status-explanation">
+                        The rental status will be automatically determined based on the current date and event dates.
+                    </p>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeUndoCancelModal()">
+                        <i class='bx bx-x'></i> Cancel
+                    </button>                    <button type="button" class="btn-primary" id="confirm-undo-btn" onclick="confirmUndoCancel()">
+                        <i class='bx bx-undo'></i> Confirm Undo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmation-modal" class="modal-overlay">
+        <div class="confirmation-modal-content">
+            <div class="confirmation-modal-header">
+                <i class='bx bx-help-circle confirmation-icon'></i>
+                <h3 id="confirmation-modal-title">Confirm Action</h3>
+            </div>
+            <div class="confirmation-modal-body">
+                <p id="confirmation-modal-message">Are you sure you want to proceed with this action?</p>
+            </div>
+            <div class="confirmation-modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeConfirmationModal()">
+                    <i class='bx bx-x'></i> Cancel
+                </button>
+                <button type="button" class="btn-primary" id="confirmation-okay-btn" onclick="proceedWithAction()">
+                    <i class='bx bx-check'></i> Okay
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cancellation Undone Modal -->
+    <div id="cancellation-undone-modal" class="modal-overlay modal-hidden">
+        <div class="success-modal-content">
+            <div class="success-modal-header">
+                <i class='bx bx-undo success-icon'></i>
+                <h3 id="cancellation-undone-title">Cancellation Undone!</h3>
+            </div>
+            <div class="success-modal-body">
+                <p id="cancellation-undone-message">The rental cancellation has been successfully undone and the status has been restored.</p>
+                <div class="status-update-info">
+                    <p><strong>New Status:</strong> <span id="undone-new-status" class="status-highlight">-</span></p>
+                </div>
+            </div>
+            <div class="success-modal-footer">
+                <button type="button" class="btn-success-ok" onclick="closeCancellationUndoneModal()">
+                    <i class='bx bx-check'></i> OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mark as Complete Confirmation Modal -->
+    <div id="mark-complete-confirmation-modal" class="modal-overlay">
+        <div class="confirmation-modal-content">
+            <div class="confirmation-modal-header">
+                <i class='bx bx-check-circle confirmation-icon'></i>
+                <h3>Mark as Complete</h3>
+            </div>
+            <div class="confirmation-modal-body">
+                <div class="warning-section complete-warning">
+                    <div class="warning-icon complete-warning-icon">
+                        <i class='bx bx-info-circle'></i>
+                    </div>
+                    <div class="warning-content">
+                        <h4>⚠️ This action cannot be reversed!</h4>
+                        <p>You are about to mark this rental as completed. This will:</p>
+                        <ul class="warning-list">
+                            <li>Change the rental status to "Completed"</li>
+                            <li>Record the completion date</li>
+                            <li>Mark items as returned</li>
+                            <li><strong>This action cannot be undone</strong></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="transaction-summary">
+                    <h4>Rental to be completed:</h4>
+                    <div class="summary-content">
+                        <p><strong>Customer:</strong> <span id="complete-customer-name">-</span></p>
+                        <p><strong>Transaction Code:</strong> <span id="complete-transaction-code">-</span></p>
+                        <p><strong>Event Date:</strong> <span id="complete-event-date">-</span></p>
+                        <p><strong>Total Amount:</strong> <span id="complete-total-amount">-</span></p>
+                    </div>
+                </div>
+                
+                <p class="final-confirmation">Are you sure you want to mark this rental as completed?</p>
+            </div>
+            <div class="confirmation-modal-footer">
+                <button type="button" class="btn-secondary" onclick="closeMarkCompleteConfirmationModal()">
+                    <i class='bx bx-x'></i> Cancel
+                </button>
+                <button type="button" class="btn-complete" id="confirm-mark-complete-btn" onclick="proceedWithMarkComplete()">
+                    <i class='bx bx-check-circle'></i> Mark as Complete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mark as Complete Success Modal -->
+    <div id="mark-complete-success-modal" class="modal-overlay modal-hidden">
+        <div class="success-modal-content">
+            <div class="success-modal-header">
+                <i class='bx bx-check-circle success-icon'></i>
+                <h3>Rental Completed!</h3>
+            </div>
+            <div class="success-modal-body">
+                <p>The rental has been successfully marked as completed.</p>
+                <div class="completion-details">
+                    <p><strong>Customer:</strong> <span id="success-customer-name">-</span></p>
+                    <p><strong>Completed Date:</strong> <span id="success-completion-date">-</span></p>
+                    <p><strong>Status:</strong> <span class="status-highlight completed">Completed</span></p>
+                </div>
+                <div class="success-note">
+                    <i class='bx bx-info-circle'></i>
+                    <span>The rental items are now marked as returned and available for other bookings.</span>
+                </div>
+            </div>
+            <div class="success-modal-footer">
+                <button type="button" class="btn-success-ok" onclick="closeMarkCompleteSuccessModal()">
+                    <i class='bx bx-check'></i> OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

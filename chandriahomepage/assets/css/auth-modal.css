@@ -1,0 +1,1074 @@
+/* =============== MODERN AUTHENTICATION MODAL =============== */
+.auth-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 15000;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding: 1rem; /* Add padding to prevent sticking to edges */
+}
+
+.auth-modal-container.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.auth-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  max-width: 95%;
+  position: relative;
+  margin: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+/* Base form styles */
+.auth-form {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    width: 100%;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    padding: 1.5rem;
+}
+
+/* Active form state */
+.auth-form.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Form section container */
+.auth-form-section {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+
+/* Specific styles for sign-up form */
+#signup-form {
+    display: none;
+}
+
+#signup-form.active {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+    position: relative;
+}
+
+/* Form content */
+.auth-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+}
+
+/* Modal adjustments */
+.auth-modal {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 400px;
+    max-width: 95%;
+    position: relative;
+    margin: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+/* Form transition effects */
+.auth-form-enter {
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.auth-form-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.auth-form-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.auth-form-exit-active {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* =============== MODERN CLOSE BUTTON =============== */
+.auth-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  color: #6b7280;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+  transition: all 0.3s ease;
+}
+
+.auth-close:hover {
+  color: #374151;
+  transform: scale(1.05);
+}
+
+/* =============== MODERN GRID LAYOUT =============== */
+.auth-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100%; /* Use full height of the modal */
+  max-height: none; /* Remove max-height constraint */
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* =============== MODERN IMAGE SECTION =============== */
+.auth-image-section {
+  position: relative;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 100%; /* Ensure it takes full height of the grid */
+}
+
+.auth-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.8;
+}
+
+.auth-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(124, 75, 162, 0.1) 100%);
+  z-index: 1;
+}
+
+.auth-brand {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+.auth-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 1.5rem;
+  filter: brightness(0) invert(1) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.auth-brand h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+.auth-brand p {
+  font-size: 1.1rem;
+  opacity: 0.95;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* =============== MODERN FORM SECTION =============== */
+.auth-form-section {
+  padding: 0; /* Removed padding to eliminate extra space */
+  margin: 0; /* Remove margin to eliminate extra space */
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+}
+
+.auth-form {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Adjusted gap */
+}
+
+.auth-form.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  padding: 0;
+  margin: 0;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Adjusted gap */
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.25rem; /* Slightly reduce bottom margin */
+  width: 100%;
+}
+
+.auth-header h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1F2937;
+  margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+.auth-form-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem; /* Adjusted gap */
+  margin-bottom: 0; /* Ensure no extra space */
+}
+
+.auth-input-group {
+  margin-bottom: 0.75rem;
+}
+
+.auth-input-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.auth-input-group input:focus {
+  outline: none;
+  border-color: hsl(346, 100%, 74%);
+  box-shadow: 0 0 0 2px rgba(255, 133, 177, 0.1);
+}
+
+/* =============== MODERN FORGOT PASSWORD =============== */
+.auth-forgot {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.auth-forgot a {
+  color: hsl(346, 100%, 74%);
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+/* =============== MODERN BUTTONS =============== */
+.auth-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.5rem; /* Reduce margin */
+}
+
+.auth-btn-primary {
+  background: hsl(346, 100%, 74%);
+  color: white;
+}
+
+.auth-btn-social {
+  background: #F3F4F6;
+  color: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* =============== MODERN DIVIDER =============== */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 0.5rem 0; /* Reduce margin */
+  color: #9CA3AF;
+  font-size: 0.75rem;
+}
+
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.auth-divider span {
+  margin: 0 0.5rem;
+}
+
+/* =============== MODERN SOCIAL BUTTONS =============== */
+.auth-social {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0.75rem 0 0.75rem 0; /* Reduced top margin from 1.25rem to 0.75rem */
+  flex-shrink: 0; /* Prevent social buttons from shrinking */
+}
+
+.auth-social-btn {
+  width: 100%;
+  height: 56px;
+  border: 2px solid #e5e7eb;
+  border-radius: 16px;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: inherit;
+}
+
+.google-btn {
+  background: #ffffff;
+  color: #3c4043;
+  border: 1px solid #dadce0;
+  border-radius: 8px;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-bottom: 0.5rem; /* Reduce bottom margin */
+}
+
+.google-btn:hover {
+  background-color: #f8f9fa;
+}
+
+.google-btn img {
+  width: 18px;
+  height: 18px;
+}
+
+.facebook-btn {
+  color: hsl(346, 100%, 74%);
+}
+
+.facebook-btn:hover {
+  border-color: hsl(346, 100%, 74%);
+  background: #fafaff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(24, 119, 242, 0.2);
+}
+
+/* =============== MODERN SVG ICONS =============== */
+.auth-social-btn svg {
+  width: 20px;
+  height: 20px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.google-btn svg {
+  color: #4285f4;
+}
+
+.facebook-btn svg {
+  color: #1877f2;
+}
+
+/* =============== MODERN FORM SWITCH =============== */
+.auth-switch {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 0; /* Remove margin to eliminate extra space */
+  padding: 0; /* Remove padding to eliminate extra space */
+  line-height: 1.5;
+}
+
+.auth-switch a {
+  color: hsl(346, 100%, 74%);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* =============== MODERN ERROR STATES =============== */
+.field-error {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.form-error {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid #dc2626;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  display: none;
+}
+
+.form-success {
+  background: #f0fdf4;
+  color: #16a34a;
+  padding: 1rem;
+  border-radius: 12px;
+  border-left: 4px solid #16a34a;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  display: none;
+}
+
+.auth-input-group input.error {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+}
+
+.auth-input-group input.error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+
+/* =============== MODERN LOADING STATES =============== */
+.auth-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-btn.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.auth-btn.loading::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 0.5rem;
+}
+
+.auth-social-btn.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.auth-social-btn.loading svg {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =============== MODERN PASSWORD TOGGLE =============== */
+.auth-input-group {
+  position: relative;
+}
+
+.password-input-wrapper {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.password-input-wrapper input {
+  flex: 1;
+  padding-right: 3.5rem !important;
+}
+
+.password-toggle {
+  position: absolute !important;
+  right: 0.5rem !important;
+  top: 55% !important;
+  transform: translateY(-50%) !important;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 1.125rem;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+  border-radius: 6px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.password-toggle:hover {
+  color: #6b7280;
+  background: #f9fafb;
+}
+
+.password-toggle:focus {
+  outline: none;
+  color: hsl(346, 100%, 74%);
+  background: rgba(255, 133, 177, 0.1);
+}
+
+.password-toggle i {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* Ensure password inputs have proper padding for the toggle button */
+.auth-input-group input[type="password"],
+.auth-input-group input[type="text"] {
+  padding-right: 3.5rem; /* Only override right padding to make space for toggle button */
+}
+
+/* Legacy class support for backward compatibility */
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #9ca3af;
+  font-size: 1.125rem;
+  padding: 0.25rem;
+  transition: color 0.2s ease;
+  border-radius: 6px;
+}
+
+.toggle-password:hover {
+  color: #6b7280;
+  background: #f9fafb;
+}
+
+/* =============== MODERN RESPONSIVE DESIGN =============== */
+/* Desktop: Square-like proportions with better padding */
+@media (min-width: 769px) {
+  .auth-modal {
+    width: 85vw;
+    max-width: 900px;
+    min-height: 600px; /* Optimized minimum height */
+    max-height: 75vh; /* Better constraint for viewport */
+    aspect-ratio: 1.4/1; /* Maintain square-like aspect ratio */
+    margin-top: 3vh; /* Better top margin for desktop */
+  }
+  
+  .auth-form-section {
+    padding: 2rem 2.5rem 2.5rem 2.5rem; /* Optimized padding for desktop */
+    height: 100%; /* Ensure full height usage */
+  }
+  
+  .auth-form.active {
+    padding: 1rem 1.5rem 2rem 1.5rem; /* Balanced padding for desktop active forms */
+    height: 100%; /* Use full available height */
+  }
+  
+  .auth-form-content {
+    gap: 1.5rem; /* Appropriate gaps on desktop */
+    justify-content: space-between; /* Better distribution on desktop */
+  }
+}
+
+@media (max-width: 768px) {
+  .auth-modal {
+    width: 95%;
+    min-height: auto;
+    max-height: 95vh;
+    margin: 1rem auto;
+  }
+
+  .auth-content {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .auth-image-section {
+    display: none; /* Hide image section on mobile */
+  }
+
+  .auth-form-section {
+    padding: 1.5rem;
+    height: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .auth-header h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .auth-form {
+    padding: 1rem;
+  }
+
+  .auth-form.active {
+    padding: 1rem;
+    height: auto;
+  }
+
+  .auth-input-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .auth-modal {
+    width: 85%;
+    margin: 2rem auto;
+  }
+  
+  .auth-form-section {
+    padding: 2rem;
+  }
+}
+
+/* =============== SIGN-UP FORM SPECIFIC STYLING =============== */
+#signup-form {
+  display: none;
+}
+
+#signup-form.active {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 1;
+  visibility: visible;
+  height: auto;
+  position: relative;
+}
+
+/* Using default browser scrollbar */
+
+#signup-form .auth-form-content {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0; /* Removed bottom padding completely */
+  /* Ensure content starts at the top */
+  margin-top: 0;
+  margin-bottom: 0; /* Ensure no bottom margin */
+  padding-right: 1.5rem;
+  padding-top: 0;
+  width: 100%; /* Ensure content takes full width */
+}
+
+#signup-form .auth-input-group {
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Ensure consistent input styling for sign-up form */
+#signup-form .auth-input-group input {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  color: #111827;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#signup-form .auth-input-group input:focus {
+  outline: none;
+  border-color: hsl(346, 100%, 74%);
+  box-shadow: 0 0 0 3px rgba(255, 133, 177, 0.1);
+  background: #ffffff;
+}
+
+#signup-form .auth-input-group input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+#signup-form .auth-input-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  margin-bottom: 0.25rem;
+}
+
+/* Reset alignment - remove the problematic margin calculations */
+#signup-form .auth-form-content > .auth-input-group {
+  margin-left: 0;
+  width: auto;
+}
+
+/* Row container for side-by-side input groups */
+#signup-form .auth-input-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+#signup-form .auth-input-row .auth-input-group {
+  flex: 1;
+  min-width: 0; /* Prevent flex items from overflowing */
+  margin-bottom: 0; /* Override the margin from regular input groups */
+}
+
+#signup-form .auth-header {
+  margin-bottom: 1rem;
+  /* Ensure header is always visible */
+  margin-top: 0;
+  padding-top: 2rem; /* Added padding-top for spacing above Welcome Back */
+  top: 0;
+  background: white;
+  z-index: 2;
+  padding-bottom: 0.5rem;
+}
+
+#signup-form .auth-btn {
+  padding: 0.75rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+#signup-form .auth-switch {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; /* Remove bottom margin */
+}
+
+/* =============== CONSISTENT AUTO-HEIGHT BEHAVIOR FOR ALL FORMS =============== */
+/* Ensure all forms (signup, signin, forgot) have identical height behavior */
+#signup-form, #signin-form, #forgot-form {
+  /* Remove all height constraints to allow auto-adjustment on desktop */
+  height: auto !important;
+}
+
+/* Mobile-specific overrides */
+@media (max-width: 768px) {
+  #signup-form, #signin-form, #forgot-form {
+    max-height: 90vh !important; /* Increased to 90vh to give maximum space for icons */
+    overflow-y: auto !important; /* Enable scrollbar on mobile */
+  }
+}
+
+/* Ensure all form sections have consistent mobile behavior */
+.auth-form-section:has(#signup-form.active),
+.auth-form-section:has(#signin-form.active),
+.auth-form-section:has(#forgot-form.active) {
+  padding: 1rem 0 0 1rem !important;
+  overflow-y: visible !important;
+  min-height: 0 !important;
+  max-height: none !important;
+}
+
+.auth-header h2 {
+  font-size: 1.5rem;
+}
+
+/* =============== SIGN-IN FORM SPECIFIC STYLING (COPIED FROM SIGN-UP) =============== */
+#signin-form {
+  padding: 0;
+  padding-top: 0.5rem; /* Reduced top padding further */
+  padding-left: 2rem; /* Add left padding for sign in form only */
+  padding-right: 2rem; /* Add right padding for sign in form only */
+  max-height: none; /* Remove max-height constraint completely */
+  overflow-y: auto; /* Enable scrollbar when content overflows */
+  overflow-x: hidden;
+  /* Ensure the form starts from the top */
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ensure form takes full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+#signin-form .auth-form-content {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0; /* Removed bottom padding completely */
+  /* Ensure content starts at the top */
+  margin-top: 0;
+  margin-bottom: 0; /* Ensure no bottom margin */
+  padding-right: 1.5rem;
+  padding-top: 0;
+  width: 100%; /* Ensure content takes full width */
+}
+
+#signin-form .auth-input-group {
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Ensure consistent input styling for sign-in form */
+#signin-form .auth-input-group input {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  color: #111827;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#signin-form .auth-input-group input:focus {
+  outline: none;
+  border-color: hsl(346, 100%, 74%);
+  box-shadow: 0 0 0 3px rgba(255, 133, 177, 0.1);
+  background: #ffffff;
+}
+
+#signin-form .auth-input-group input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+#signin-form .auth-input-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  margin-bottom: 0.25rem;
+}
+
+/* Reset alignment - remove the problematic margin calculations */
+#signin-form .auth-form-content > .auth-input-group {
+  margin-left: 0;
+  width: auto;
+}
+
+/* Row container for side-by-side input groups */
+#signin-form .auth-input-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+#signin-form .auth-input-row .auth-input-group {
+  flex: 1;
+  min-width: 0; /* Prevent flex items from overflowing */
+  margin-bottom: 0; /* Override the margin from regular input groups */
+}
+
+#signin-form .auth-header {
+  margin-bottom: 1rem;
+  /* Ensure header is always visible */
+  margin-top: 0;
+  padding-top: 2rem; /* Added padding-top for spacing above Welcome Back */
+  top: 0;
+  background: white;
+  z-index: 2;
+  padding-bottom: 0.5rem;
+}
+
+#signin-form .auth-btn {
+  padding: 0.75rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+#signin-form .auth-switch {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; /* Remove bottom margin */
+}
+
+/* =============== FORGOT PASSWORD FORM STYLING =============== */
+#forgot-form {
+  padding: 0;
+  padding-top: 0.5rem; /* Reduced top padding further */
+  padding-left: 2rem; /* Add left padding for forgot password form only */
+  padding-right: 2rem; /* Add right padding for forgot password form only */
+  max-height: none; /* Remove max-height constraint completely */
+  overflow-y: visible; /* Change to visible to prevent unnecessary scrolling */
+  overflow-x: hidden;
+  /* Ensure the form starts from the top */
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Ensure form takes full width */
+  box-sizing: border-box; /* Include padding in width calculation */
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+#forgot-form .auth-form-content {
+  gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0; /* Removed bottom padding completely */
+  /* Ensure content starts at the top */
+  margin-top: 0;
+  margin-bottom: 0; /* Ensure no bottom margin */
+  padding-right: 1.5rem;
+  padding-top: 0;
+  width: 100%; /* Ensure content takes full width */
+}
+
+#forgot-form .auth-input-group {
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Ensure consistent input styling for forgot form */
+#forgot-form .auth-input-group input {
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  background: #ffffff;
+  color: #111827;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#forgot-form .auth-input-group input:focus {
+  outline: none;
+  border-color: hsl(346, 100%, 74%);
+  box-shadow: 0 0 0 3px rgba(255, 133, 177, 0.1);
+  background: #ffffff;
+}
+
+#forgot-form .auth-input-group input::placeholder {
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+#forgot-form .auth-input-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+  margin-bottom: 0.25rem;
+}
+
+/* Reset alignment - remove the problematic margin calculations */
+#forgot-form .auth-form-content > .auth-input-group {
+  margin-left: 0;
+  width: auto;
+}
+
+#forgot-form .auth-header {
+  margin-bottom: 1rem;
+  /* Ensure header is always visible */
+  margin-top: 0;
+  padding-top: 2rem; /* Added padding-top for spacing above Welcome Back */
+  top: 0;
+  background: white;
+  z-index: 2;
+  padding-bottom: 0.5rem;
+}
+
+#forgot-form .auth-btn {
+  padding: 0.75rem;
+  margin-top: 0.125rem;
+  margin-bottom: 0; /* Remove bottom margin */
+}
+
+#forgot-form .auth-switch {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem; /* Remove bottom margin */
+}
+
+/* =============== WISHLIST CONTENT VISIBILITY =============== */
+.wishlist.section-lg.container {
+  display: none; /* Hidden by default until user is authenticated */
+}
+
+.wishlist.section-lg.container.authenticated {
+  display: block; /* Show when user is authenticated */
+}
+
+/* =============== CONSISTENT AUTO-HEIGHT BEHAVIOR FOR ALL FORMS =============== */
+
+/* =============== NOTYF NOTIFICATIONS Z-INDEX FIX =============== */
+.notyf {
+  z-index: 20000 !important;
+}
+
+.notyf__toast {
+  z-index: 20001 !important;
+}

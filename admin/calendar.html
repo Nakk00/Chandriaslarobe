@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />        <title>Chandria's La Robe - Admin</title>        <!-- EXTERNAL CSS -->
+        <link rel="stylesheet" href="./assets/css/admin-layout.css" />
+        <link rel="stylesheet" href="./assets/css/admin-layout-mob.css" />
+        <link rel="stylesheet" href="./assets/css/spinners-admin.css" />        <link rel="stylesheet" href="./assets/css/rental-calendar.css" />
+        <link rel="stylesheet" href="./assets/css/status-colors.css" />
+        <link rel="stylesheet" href="./assets/css/transaction-stats.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+    </head>    <body>
+        <!-- Page Loader -->        <div class="admin-page-loader">
+            <div class="admin-spinner-with-text">
+                <div class="admin-page-spinner"></div>
+                <div class="admin-spinner-text">Loading Page...</div>
+            </div>
+        </div>
+
+        <!-- Action Spinner -->
+        <div class="admin-action-spinner">
+            <div class="admin-spinner-with-text">
+                <div class="admin-spinner"></div>
+                <div class="admin-spinner-text">Processing...</div>
+            </div>
+        </div>
+
+        <nav class="sidebar close">
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                        <img
+                            src="./assets/images/chandriaslogo.png"
+                            alt="logo"
+                        />
+                    </span>
+                </div>
+
+                <i class="bx bx-chevron-right toggle"></i>
+            </header>
+
+            <div class="menu-bar">
+                <div class="menu">
+                    <ul class="menu-links">                        <li class="nav-link">
+                            <a href="./dashboard.html">
+                                <i class="bx bxs-dashboard icon"></i>
+                                <span class="text nav-text">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./analytics.html">
+                                <i class='bx bxs-bar-chart-alt-2 icon'></i>
+                                <span class="text nav-text">Analytics</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./inventory.html">
+                                <i class="bx bxs-t-shirt icon"></i>
+                                <span class="text nav-text">Inventory</span>
+                            </a>
+                        </li><li class="nav-link active">
+                            <a href="./calendar.html">
+                                <i class="bx bxs-calendar icon"></i>
+                                <span class="text nav-text">Calendar</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./rental.html">
+                                <i class="bx bxs-package icon"></i>
+                                <span class="text nav-text">Rental</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./customer-logs.html">
+                                <i class="bx bxs-user icon"></i>
+                                <span class="text nav-text">Rental History</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-link">
+                            <a href="./settings.html">
+                                <i class="bx bxs-cog icon"></i>
+                                <span class="text nav-text">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bottom-content"></div>
+            </div>
+        </nav>        <main class="main-content">
+            <header class="page-header">
+                <div class="header-left">
+                    <h1 class="page-title">Rental Calendar</h1>
+                    <p class="page-subtitle">View all product rentals by date</p>
+                </div>
+                <div class="header-right">
+                    <div class="calendar-filters">
+                        <select id="status-filter" class="filter-select">
+                            <option value="all">All Status</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="overdue">Overdue</option>
+                        </select>
+                        <button id="today-btn" class="btn-today">Today</button>
+                    </div>
+                </div>
+            </header>            <div class="page-content">
+                <!-- Transaction Statistics Panel -->
+                <div class="transaction-stats" id="transaction-stats">
+                    <div class="stat-item stat-upcoming">
+                        <div class="stat-value" id="stat-upcoming">0</div>
+                        <div class="stat-label">Upcoming</div>
+                    </div>
+                    <div class="stat-item stat-ongoing">
+                        <div class="stat-value" id="stat-ongoing">0</div>
+                        <div class="stat-label">Ongoing</div>
+                    </div>
+
+                    <div class="stat-item stat-overdue">
+                        <div class="stat-value" id="stat-overdue">0</div>
+                        <div class="stat-label">Overdue</div>
+                    </div>
+                </div>
+
+                <div class="calendar-container" id="calendar-container">
+                    <!-- Calendar Navigation -->
+                    <div class="calendar-header">
+                        <div class="calendar-nav">
+                            <button id="prev-month" class="nav-btn">
+                                <i class="bx bx-chevron-left"></i>
+                            </button>
+                            <div class="calendar-title">
+                                <h2 id="current-month-year">December 2024</h2>
+                            </div>
+                            <button id="next-month" class="nav-btn">
+                                <i class="bx bx-chevron-right"></i>
+                            </button>
+                        </div>
+                          <!-- Legend -->
+                        <div class="calendar-legend">
+                            <div class="legend-item">
+                                <span class="legend-color upcoming"></span>
+                                <span>Upcoming</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color ongoing"></span>
+                                <span>Ongoing</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color overdue"></span>
+                                <span>Overdue</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="calendar-grid">
+                        <!-- Days of Week Header -->
+                        <div class="calendar-days-header">
+                            <div class="day-header">Sun</div>
+                            <div class="day-header">Mon</div>
+                            <div class="day-header">Tue</div>
+                            <div class="day-header">Wed</div>
+                            <div class="day-header">Thu</div>
+                            <div class="day-header">Fri</div>
+                            <div class="day-header">Sat</div>
+                        </div>
+                        
+                        <!-- Calendar Days -->
+                        <div id="calendar-days" class="calendar-days">
+                            <!-- Days will be generated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rental Details Modal -->
+                <div id="rental-details-modal" class="modal">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 id="modal-date-title">Rentals for Date</h3>
+                            <button class="close-modal">
+                                <i class="bx bx-x"></i>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="rental-details-list" class="rental-details-list">
+                                <!-- Rental details will be populated here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main><!-- Mobile Bottom Navigation (hidden on desktop) -->        <nav class="mobile-bottom-nav">
+            <a href="./dashboard.html" class="mobile-nav-item">
+                <i class="bx bxs-dashboard icon"></i>
+                <span class="text">Dashboard</span>
+            </a>
+            <a href="./analytics.html" class="mobile-nav-item">
+                <i class='bx bxs-bar-chart-alt-2 icon'></i>
+                <span class="text">Analytics</span>
+            </a>
+            <a href="./inventory.html" class="mobile-nav-item">
+                <i class="bx bxs-t-shirt icon"></i>
+                <span class="text">Inventory</span>
+            </a>
+            <a href="./calendar.html" class="mobile-nav-item active">
+                <i class="bx bxs-calendar icon"></i>
+                <span class="text">Calendar</span>
+            </a>
+            <a href="./rental.html" class="mobile-nav-item">
+                <i class="bx bxs-package icon"></i>
+                <span class="text">Rental</span>
+            </a>
+            <a href="./customer-logs.html" class="mobile-nav-item">
+                <i class="bx bxs-user icon"></i>
+                <span class="text">Logs</span>
+            </a>
+            <a href="./settings.html" class="mobile-nav-item">
+                <i class="bx bxs-cog icon"></i>
+                <span class="text">Settings</span>
+            </a>
+        </nav>
+          <!-- Firebase Scripts -->
+        <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+        <script src="./firebase-config.js"></script>
+        
+        <!-- Auth Guard - Must be loaded early -->
+        <script type="module" src="./assets/js/auth-guard.js"></script>
+        
+          <!-- JQUERY CDN -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"
+        ></script>        <!-- Admin Layout JS -->
+        <script src="./assets/js/spinners-admin.js"></script>
+        <script src="./assets/js/admin-layout.js"></script>
+        <script src="./assets/js/admin-layout-mob.js"></script>
+        <script src="./assets/js/rental-calendar-service.js"></script>
+    </body>
+</html>

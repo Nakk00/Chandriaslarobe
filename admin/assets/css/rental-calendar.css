@@ -1,0 +1,1620 @@
+/* ===============================================
+   RENTAL CALENDAR STYLES
+   Dynamic calendar for viewing product rentals
+   =============================================== */
+
+/* =============== CALENDAR CONTAINER =============== */
+.page-content {
+    padding: 20px 30px;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* Custom scrollbar styles */
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* Webkit scrollbar styles */
+.page-content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.page-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.page-content::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.page-content::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+.calendar-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    overflow: auto;
+    margin: 0 auto;
+    max-width: calc(100vw - 320px); /* Account for sidebar width */
+    width: 100%;
+    box-sizing: border-box;
+    /* Custom scrollbar styles */
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+/* Webkit scrollbar styles for calendar container */
+.calendar-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.calendar-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.calendar-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.calendar-container::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* Adjust width when sidebar is closed */
+.sidebar.close ~ .main-content .calendar-container {
+    max-width: calc(100vw - 148px); /* Account for closed sidebar width + padding */
+}
+
+/* =============== CALENDAR HEADER =============== */
+.calendar-header {
+    background: linear-gradient(135deg, var(--primary-color), #ff6b9d);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.calendar-title h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    min-width: 200px;
+    text-align: center;
+}
+
+/* =============== CALENDAR LEGEND =============== */
+.calendar-legend {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.legend-color.upcoming {
+    background: #ffeaa7;
+    border: 1px solid #856404;
+}
+
+.legend-color.ongoing {
+    background: #a7f3d0;
+    border: 1px solid #155724;
+}
+
+.legend-color.completed {
+    background: #a7d8e7;
+    border: 1px solid #0c5460;
+}
+
+.legend-color.overdue {
+    background: #fca5a5;
+    border: 1px solid #721c24;
+}
+
+.legend-color.cancelled {
+    background: #d1d5db;
+    border: 1px solid #374151;
+}
+
+.legend-color.pending {
+    background: #fef3c7;
+    border: 1px solid #92400e;
+}
+
+/* =============== CALENDAR FILTERS =============== */
+.calendar-filters {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.filter-select {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(166, 122, 99, 0.1);
+}
+
+.btn-today {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-today:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+/* =============== CALENDAR GRID =============== */
+.calendar-grid {
+    background: white;
+}
+
+.calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    background: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 5;
+}
+
+.day-header {
+    padding: 16px 8px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+.day-header:last-child {
+    border-right: none;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: minmax(120px, auto);
+    overflow: auto;
+    max-height: calc(100vh - 300px); /* Limit height to prevent overflow */
+    /* Custom scrollbar styles */
+    scrollbar-width: thin;
+    scrollbar-color: #c1c1c1 #f1f1f1;
+    /* Ensure proper alignment with headers */
+    align-items: stretch;
+}
+
+/* Webkit scrollbar styles for calendar days */
+.calendar-days::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.calendar-days::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.calendar-days::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.calendar-days::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* =============== CALENDAR DAY CELLS =============== */
+.calendar-day {
+    border-right: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    min-height: 120px;
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* Ensure proper alignment with headers */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.calendar-day:nth-child(7n) {
+    border-right: none;
+}
+
+.calendar-day:hover {
+    background-color: #f8f9fa;
+}
+
+.calendar-day.other-month {
+    background-color: #fafafa;
+    color: #ccc;
+}
+
+.calendar-day.today {
+    background-color: rgba(166, 122, 99, 0.1);
+    border: 2px solid var(--primary-color);
+    box-sizing: border-box;
+}
+
+.calendar-day.has-rentals {
+    cursor: pointer;
+}
+
+.calendar-day.has-rentals:hover {
+    background-color: rgba(166, 122, 99, 0.05);
+}
+
+/* =============== DAY NUMBER =============== */
+.day-number {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.calendar-day.other-month .day-number {
+    color: #ccc;
+}
+
+.calendar-day.today .day-number {
+    color: var(--primary-color);
+    font-weight: 700;
+}
+
+/* Status-based day number colors */
+.calendar-day.has-upcoming .day-number {
+    color: #856404; /* Upcoming color from status */
+    font-weight: 700;
+}
+
+.calendar-day.has-ongoing .day-number {
+    color: #155724; /* Ongoing color from status */
+    font-weight: 700;
+}
+
+.calendar-day.has-completed .day-number {
+    color: #0c5460; /* Completed color from status */
+    font-weight: 700;
+}
+
+.calendar-day.has-overdue .day-number {
+    color: #721c24; /* Overdue color from status */
+    font-weight: 700;
+    animation: pulseNumber 2s infinite;
+}
+
+.calendar-day.has-cancelled .day-number {
+    color: #374151; /* Cancelled color from status */
+    font-weight: 700;
+}
+
+.calendar-day.has-pending .day-number {
+    color: #92400e; /* Pending color from status */
+    font-weight: 700;
+}
+
+/* Animation for overdue day numbers */
+@keyframes pulseNumber {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* Multiple status priorities - overdue takes precedence */
+.calendar-day.has-overdue.has-upcoming .day-number,
+.calendar-day.has-overdue.has-ongoing .day-number,
+.calendar-day.has-overdue.has-completed .day-number {
+    color: #721c24; /* Overdue always takes priority */
+}
+
+/* Ongoing takes precedence over upcoming and completed */
+.calendar-day.has-ongoing.has-upcoming .day-number,
+.calendar-day.has-ongoing.has-completed .day-number {
+    color: #155724; /* Ongoing color */
+}
+
+/* =============== RENTAL ITEMS =============== */
+.rental-items {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(100% - 25px); /* Leave space for day number */
+    /* Custom scrollbar styles */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(193, 193, 193, 0.7) transparent;
+}
+
+/* Webkit scrollbar styles for rental items */
+.rental-items::-webkit-scrollbar {
+    width: 4px;
+}
+
+.rental-items::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.rental-items::-webkit-scrollbar-thumb {
+    background: rgba(193, 193, 193, 0.7);
+    border-radius: 2px;
+}
+
+.rental-items::-webkit-scrollbar-thumb:hover {
+    background: rgba(161, 161, 161, 0.9);
+}
+
+.rental-item {
+    background: var(--primary-color);
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.rental-item:hover {
+    transform: translateY(-2px) scale(1.05);
+    z-index: 10;
+    position: relative;
+    white-space: normal;
+    overflow: visible;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.rental-item:active {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Status-based colors matching status-colors.css */
+.rental-item.upcoming {
+    background: #ffeaa7;
+    color: #856404;
+    border: 1px solid #856404;
+}
+
+.rental-item.upcoming:hover {
+    background: #f7dc6f;
+    box-shadow: 0 4px 12px rgba(133, 100, 4, 0.4);
+}
+
+.rental-item.ongoing {
+    background: #a7f3d0;
+    color: #155724;
+    border: 1px solid #155724;
+}
+
+.rental-item.ongoing:hover {
+    background: #82e0aa;
+    box-shadow: 0 4px 12px rgba(21, 87, 36, 0.4);
+}
+
+.rental-item.completed {
+    background: #a7d8e7;
+    color: #0c5460;
+    border: 1px solid #0c5460;
+}
+
+.rental-item.completed:hover {
+    background: #85c1e9;
+    box-shadow: 0 4px 12px rgba(12, 84, 96, 0.4);
+}
+
+.rental-item.overdue {
+    background: #fca5a5;
+    color: #721c24;
+    border: 1px solid #721c24;
+    animation: pulse 2s infinite;
+}
+
+.rental-item.overdue:hover {
+    background: #f1948a;
+    box-shadow: 0 4px 12px rgba(114, 28, 36, 0.4);
+    animation: none; /* Stop pulsing on hover */
+}
+
+.rental-item.cancelled {
+    background: #d1d5db;
+    color: #374151;
+    border: 1px solid #374151;
+}
+
+.rental-item.cancelled:hover {
+    background: #bdc3c7;
+    box-shadow: 0 4px 12px rgba(55, 65, 81, 0.4);
+}
+
+.rental-item.pending {
+    background: #fef3c7;
+    color: #92400e;
+    border: 1px solid #92400e;
+}
+
+.rental-item.pending:hover {
+    background: #fde68a;
+    box-shadow: 0 4px 12px rgba(146, 64, 14, 0.4);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* More rentals indicator */
+.more-rentals {
+    background: #6c757d;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 2px;
+    transition: all 0.3s ease;
+}
+
+.more-rentals:hover {
+    background: #5a6268;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Special styling for longest rental */
+.rental-item.longest-rental {
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.rental-item.longest-rental::before {
+    content: '👑';
+    margin-right: 4px;
+    font-size: 0.6rem;
+}
+
+/* =============== RENTAL QUICK VIEW =============== */
+.rental-quick-view {
+    position: fixed !important;
+    background: white !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35) !important;
+    border: 1px solid var(--border-color) !important;
+    min-width: 300px !important;
+    max-width: 350px !important;
+    z-index: 999999 !important;
+    animation: quickViewFadeIn 0.2s ease-out !important;
+    backdrop-filter: none !important;
+    pointer-events: all !important;
+    /* Aggressive positioning fixes */
+    transform: translateZ(0) !important;
+    -webkit-transform: translateZ(0) !important;
+    backface-visibility: hidden !important;
+    -webkit-backface-visibility: hidden !important;
+    will-change: auto !important;
+    -webkit-font-smoothing: antialiased !important;
+    contain: layout style paint !important;
+    isolation: isolate !important;
+}
+
+/* Prevent quick view from moving during scroll */
+body.quick-view-active .rental-quick-view {
+    position: fixed !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+}
+
+/* Ensure quick view content doesn't interfere with positioning */
+.rental-quick-view * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Ultra-aggressive positioning for scroll prevention */
+.rental-quick-view {
+    /* Force hardware acceleration and prevent any layout shifts */
+    transform: translate3d(0, 0, 0) !important;
+    -webkit-transform: translate3d(0, 0, 0) !important;
+    position: fixed !important;
+    left: var(--qv-left, 10px) !important;
+    top: var(--qv-top, 10px) !important;
+}
+
+/* Prevent any parent elements from affecting positioning */
+.rental-quick-view,
+.rental-quick-view * {
+    box-sizing: border-box !important;
+}
+
+@keyframes quickViewFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes quickViewFadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-3px) scale(0.98);
+    }
+}
+
+.quick-view-content {
+    padding: 18px;
+    background: white;
+    border-radius: 12px;
+}
+
+.quick-view-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.quick-view-header h4 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    line-height: 1.3;
+    flex: 1;
+    margin-right: 12px;
+}
+
+.quick-view-status {
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.quick-view-status.upcoming {
+    background: #3498db;
+    color: white;
+}
+
+.quick-view-status.ongoing {
+    background: #f39c12;
+    color: white;
+}
+
+.quick-view-status.completed {
+    background: #27ae60;
+    color: white;
+}
+
+.quick-view-status.overdue {
+    background: #e74c3c;
+    color: white;
+}
+
+.quick-view-body {
+    margin-bottom: 14px;
+}
+
+.quick-view-body p {
+    margin: 8px 0;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.quick-view-body strong {
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+/* Special styling for rental type field */
+.quick-view-body p:first-child {
+    background: linear-gradient(135deg, var(--primary-color), #ff6b9d);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin: -2px 0 12px 0;
+    font-weight: 500;
+    font-size: 0.85rem;
+    line-height: 1.3;
+    word-wrap: break-word;
+}
+
+.quick-view-body p:first-child strong {
+    color: white;
+    font-weight: 600;
+    display: block;    margin-bottom: 2px;
+}
+
+.quick-view-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-top: 4px;
+}
+
+.btn-view-full,
+.btn-close-quick {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.btn-view-full {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-view-full:hover {
+    background: var(--secondary-text-color);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-close-quick {
+    background: #f8f9fa;
+    color: #6c757d;
+    border-color: #dee2e6;
+}
+
+.btn-close-quick:hover {
+    background: #e9ecef;
+    color: #495057;
+    transform: translateY(-1px);
+}
+
+/* =============== VIEW HISTORY BUTTON =============== */
+.btn-history {
+    background: linear-gradient(135deg, var(--primary-color, #ff4757), #ff6b9d);
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-history:hover {
+    background: linear-gradient(135deg, #ff3742, #ff5a8a);
+    transform: translateY(-1px);
+}
+
+/* =============== ENHANCED MOBILE RESPONSIVE STYLES =============== */
+
+/* =============== MOBILE PORTRAIT MODE =============== */
+/* =============== MOBILE PORTRAIT MODE =============== */
+@media (max-width: 768px) and (orientation: portrait) {
+    .page-content {
+        padding: 8px 10px;
+    }
+    
+    .calendar-container {
+        max-width: 100vw;
+        margin: 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+    
+    /* Compact header for portrait */
+    .calendar-header {
+        padding: 10px 12px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .calendar-title h2 {
+        font-size: 1.2rem;
+        min-width: auto;
+        margin-bottom: 6px;
+    }
+    
+    .calendar-nav {
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .nav-btn {
+        width: 34px;
+        height: 34px;
+        font-size: 1rem;
+    }
+    
+    /* Minimize legend in portrait */
+    .calendar-legend {
+        justify-content: center;
+        gap: 6px;
+        flex-wrap: wrap;
+    }
+    
+    .legend-item {
+        font-size: 0.7rem;
+        gap: 3px;
+    }
+    
+    .legend-color {
+        width: 8px;
+        height: 8px;
+    }
+      /* Optimize calendar grid for portrait */
+    .calendar-days-header {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: #f8f9fa;
+    }
+    
+    .day-header {
+        padding: 6px 2px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        border-right: 1px solid var(--border-color);
+    }
+    
+    .day-header:nth-child(7) {
+        border-right: none;
+    }
+    
+    .calendar-days {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-auto-rows: minmax(70px, auto);
+        gap: 0;
+        align-items: stretch;
+    }
+    
+    .calendar-day {
+        min-height: 70px;
+        padding: 3px;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .calendar-day:nth-child(7n) {
+        border-right: none;
+    }
+    
+    .day-number {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+        font-weight: 600;
+    }
+    
+    /* Minimize rental items in portrait */
+    .rental-item {
+        font-size: 0.6rem;
+        padding: 1px 3px;
+        margin-bottom: 1px;
+        border-radius: 2px;
+        line-height: 1.1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+    
+    .more-rentals {
+        font-size: 0.55rem;
+        padding: 1px 2px;
+    }
+    
+    .rental-items {        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        overflow: hidden;
+    }
+}
+
+/* =============== MOBILE LANDSCAPE MODE =============== */
+@media (max-width: 1024px) and (orientation: landscape) and (max-height: 768px) {
+    .page-content {
+        padding: 6px 10px;
+    }
+    
+    .calendar-container {
+        max-width: 100vw;
+        margin: 0;
+        border-radius: 6px;
+        height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+    
+    /* Optimized header for landscape */
+    .calendar-header {
+        padding: 6px 12px;
+        flex-shrink: 0;
+        gap: 8px;
+    }
+    
+    .calendar-title h2 {
+        font-size: 1.1rem;
+        min-width: auto;
+        margin: 0;
+    }
+    
+    .nav-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    /* Compact legend for landscape */
+    .calendar-legend {
+        gap: 8px;
+    }
+    
+    .legend-item {
+        font-size: 0.65rem;
+        gap: 2px;
+    }
+    
+    .legend-color {
+        width: 6px;
+        height: 6px;
+    }
+    
+    /* Optimize calendar grid for landscape */
+    .calendar-grid {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+      .calendar-days-header {
+        flex-shrink: 0;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        /* Ensure perfect alignment */
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+    
+    .day-header {
+        padding: 4px 2px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        /* Ensure header alignment */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 30px;
+        border-right: 1px solid var(--border-color);
+    }
+    
+    .day-header:nth-child(7) {
+        border-right: none;
+    }
+      .calendar-days {
+        flex: 1;
+        overflow-y: auto;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-auto-rows: minmax(60px, auto);
+        /* Ensure perfect alignment with headers */
+        align-items: stretch;
+    }
+    
+    .calendar-day {
+        /* Ensure day cells align with headers */
+        width: 100%;
+        box-sizing: border-box;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+      .calendar-day:nth-child(7n) {
+        border-right: none;
+        min-height: 60px;
+        padding: 2px;
+    }
+    
+    .day-number {
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+        font-weight: 600;
+    }
+    
+    /* Compact rental items for landscape */
+    .rental-item {
+        font-size: 0.55rem;
+        padding: 1px 2px;
+        margin-bottom: 1px;
+        border-radius: 2px;
+        line-height: 1;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+    }
+    
+    .more-rentals {
+        font-size: 0.5rem;
+        padding: 0px 1px;
+    }
+    
+    .rental-items {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        overflow: hidden;
+        max-height: calc(60px - 20px);    }
+}
+
+/* =============== SMALL MOBILE DEVICES =============== */
+@media (max-width: 480px) {
+    .calendar-container {
+        border-radius: 4px;
+    }
+    
+    .calendar-header {
+        padding: 8px 12px;
+    }
+    
+    .calendar-title h2 {
+        font-size: 1.1rem;
+    }
+    
+    .nav-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+    
+    .day-header {
+        padding: 6px 2px;
+        font-size: 0.65rem;
+    }
+    
+    .calendar-day {
+        min-height: 60px;
+        padding: 2px;
+    }
+    
+    .day-number {
+        font-size: 0.75rem;
+        margin-bottom: 2px;
+    }
+    
+    .rental-item {
+        font-size: 0.55rem;
+        padding: 1px 2px;
+        margin-bottom: 1px;
+    }
+    
+    /* Hide legend on very small screens to save space */
+    .calendar-legend {
+        display: none;
+    }
+}
+
+/* =============== LANDSCAPE SPECIFIC MOBILE =============== */
+@media (max-width: 768px) and (orientation: landscape) and (max-height: 500px) {
+    .page-content {
+        padding: 5px 8px;
+    }
+    
+    .calendar-header {
+        padding: 5px 12px;
+    }
+    
+    .calendar-title h2 {
+        font-size: 1rem;
+    }
+    
+    .nav-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.85rem;
+    }
+    
+    .day-header {
+        padding: 4px 2px;
+        font-size: 0.6rem;
+    }
+    
+    .calendar-day {
+        min-height: 50px;
+        padding: 2px;
+    }
+    
+    .day-number {
+        font-size: 0.7rem;
+        margin-bottom: 1px;
+    }
+    
+    .rental-item {
+        font-size: 0.5rem;
+        padding: 1px;
+        margin-bottom: 1px;
+        line-height: 1;
+    }
+    
+    /* Further minimize legend */
+    .calendar-legend {
+        gap: 6px;
+    }
+    
+    .legend-item {
+        font-size: 0.6rem;
+    }
+    
+    .legend-color {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* =============== MODAL STYLES =============== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    overflow: auto;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal.show {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: white;
+    margin: auto;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow: hidden;
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary-color), #ff6b9d);
+    color: white;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: none;
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.close-modal {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.close-modal:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 24px;
+    max-height: calc(90vh - 120px);
+    overflow-y: auto;
+}
+
+.rental-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.rental-detail-item {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.3s ease;
+}
+
+.rental-detail-item:hover {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.rental-detail-header {
+    display: flex;
+    justify-content: between;
+    align-items: center;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rental-customer-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+    flex: 1;
+}
+
+.rental-status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rental-detail-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.rental-info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.rental-info-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rental-info-value {
+    color: #555;
+}
+
+/* Rental products section */
+.rental-products {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #e9ecef;
+}
+
+.rental-products h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.product-tag {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 4px 8px;
+    border-radius: 16px;
+    font-size: 0.8rem;
+    color: #495057;
+    font-weight: 500;
+}
+
+/* Apply status colors to rental detail items */
+.rental-detail-item.upcoming {
+    border-left: 4px solid var(--status-upcoming-color, #ffc107);
+}
+
+.rental-detail-item.ongoing {
+    border-left: 4px solid var(--status-ongoing-color, #17a2b8);
+}
+
+.rental-detail-item.overdue {
+    border-left: 4px solid var(--status-overdue-color, #dc3545);
+}
+
+.rental-status.upcoming {
+    background: var(--status-upcoming-bg, #fff3cd);
+    color: var(--status-upcoming-text, #856404);
+    border: 1px solid var(--status-upcoming-border, #ffeaa7);
+}
+
+.rental-status.ongoing {
+    background: var(--status-ongoing-bg, #d1ecf1);
+    color: var(--status-ongoing-text, #0c5460);
+    border: 1px solid var(--status-ongoing-border, #bee5eb);
+}
+
+.rental-status.overdue {
+    background: var(--status-overdue-bg, #f8d7da);
+    color: var(--status-overdue-text, #721c24);
+    border: 1px solid var(--status-overdue-border, #f5c6cb);
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* =============== MODAL MOBILE RESPONSIVENESS =============== */
+@media (max-width: 768px) {
+    .modal {
+        padding: 8px;
+        align-items: flex-start;
+        padding-top: 20px;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-width: none;
+        margin: 0;
+        border-radius: 12px;
+        max-height: 85vh;
+    }
+    
+    .modal-header {
+        padding: 16px 20px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.1rem;
+    }
+    
+    .modal-body {
+        padding: 16px 20px;
+        max-height: calc(85vh - 80px);
+    }
+    
+    .rental-details-list {
+        max-height: calc(85vh - 120px);
+        gap: 12px;
+    }
+    
+    .rental-detail-item {
+        padding: 12px;
+        margin-bottom: 0;
+    }
+    
+    .rental-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .rental-customer-name {
+        font-size: 1rem;
+        width: 100%;
+    }
+    
+    .rental-detail-info {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+      .close-modal {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+    }
+    
+    /* Mobile specific modal content styles */
+    .rental-products h4 {
+        font-size: 0.85rem;
+        margin-bottom: 6px;
+    }
+    
+    .product-list {
+        gap: 4px;
+    }
+    
+    .product-tag {
+        font-size: 0.75rem;
+        padding: 3px 6px;
+    }
+    
+    .rental-info-label {
+        font-size: 0.75rem;
+    }
+    
+    .rental-info-value {
+        font-size: 0.85rem;
+    }
+}
+
+/* =============== MODAL LANDSCAPE MOBILE =============== */
+@media (max-width: 768px) and (orientation: landscape) {
+    .modal {
+        padding: 4px;
+        padding-top: 10px;
+    }
+    
+    .modal-content {
+        width: 98%;
+        max-height: 92vh;
+    }
+    
+    .modal-header {
+        padding: 12px 16px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1rem;
+    }
+    
+    .modal-body {
+        padding: 12px 16px;
+        max-height: calc(92vh - 60px);
+    }
+    
+    .rental-details-list {
+        max-height: calc(92vh - 80px);
+        gap: 8px;
+    }
+    
+    .rental-detail-item {
+        padding: 8px 12px;
+    }
+    
+    .rental-detail-info {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 8px;
+        font-size: 0.85rem;
+    }
+      .close-modal {
+        width: 24px;
+        height: 24px;
+        font-size: 0.9rem;
+    }
+    
+    /* Landscape mobile specific modal content styles */
+    .rental-products {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+    
+    .rental-products h4 {
+        font-size: 0.8rem;
+        margin-bottom: 4px;
+    }
+    
+    .product-list {
+        gap: 3px;
+    }
+    
+    .product-tag {
+        font-size: 0.7rem;
+        padding: 2px 5px;
+    }
+    
+    .rental-customer-name {
+        font-size: 0.9rem;
+    }
+    
+    .rental-status-badge {
+        font-size: 0.75rem;
+        padding: 2px 8px;
+    }
+}
+
+/* Touch and interaction improvements for mobile */
+@media (max-width: 768px) {
+    .modal {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal-content {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .rental-details-list {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .rental-detail-item {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        transition: all 0.2s ease;
+    }
+    
+    .rental-detail-item:active {
+        background: #e9ecef;
+        transform: scale(0.98);
+    }
+    
+    .close-modal {
+        -webkit-tap-highlight-color: transparent;
+        transition: all 0.2s ease;
+    }
+    
+    .close-modal:active {
+        transform: scale(0.9);
+    }
+}
+
+/* =============== ACCESSIBILITY IMPROVEMENTS =============== */
+@media (max-width: 768px) {
+    /* Ensure touch targets are at least 44px */
+    .nav-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+    
+    .calendar-day {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .rental-item {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+    }
+}
+
+/* =============== HIDE SIDEBAR ON MOBILE =============== */
+@media (max-width: 768px) {
+    .sidebar.close ~ .main-content .calendar-container,
+    .main-content .calendar-container {
+        max-width: 100vw;
+        margin-left: 0;
+    }
+    
+    .page-content {
+        margin-left: 0;
+    }
+}
+
+/* ===============================================
+   END OF RENTAL CALENDAR STYLES
+   =============================================== */

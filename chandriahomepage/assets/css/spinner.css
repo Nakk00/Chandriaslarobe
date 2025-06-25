@@ -1,0 +1,277 @@
+/* =============== CENTRALIZED SPINNER STYLES =============== */
+
+/* Base spinner container */
+.page-spinner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.3s ease;
+}
+
+.page-spinner.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Spinner content container */
+.spinner-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Ring spinner animation */
+.spinner-ring-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.spinner-ring {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    border: 6px solid transparent;
+    border-radius: 50%;
+    animation: spinner-ring 1.5s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.spinner-ring:nth-child(1) {
+    border-top-color: #e91e63;
+    animation-delay: -0.45s;
+}
+
+.spinner-ring:nth-child(2) {
+    border-top-color: #f06292;
+    animation-delay: -0.3s;
+}
+
+.spinner-ring:nth-child(3) {
+    border-top-color: #f8bbd9;
+    animation-delay: -0.15s;
+}
+
+.spinner-ring:nth-child(4) {
+    border-top-color: #fce4ec;
+}
+
+@keyframes spinner-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Spinner text */
+.spinner-text {
+    color: #e91e63;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Alternative simple spinner */
+.simple-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #e91e63;
+    border-radius: 50%;
+    animation: simple-spin 1s ease infinite;
+}
+
+@keyframes simple-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* =============== TEMPORARY SPINNER =============== */
+.temporary-spinner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Specific spinner types */
+#navigation-spinner,
+#details-navigation-loader {
+    background: #ffffff;
+}
+
+#shop-spinner,
+.shop-loader {
+    background: #ffffff;
+}
+
+#checkout-spinner,
+.checkout-loader {
+    background: #ffffff;
+}
+
+#wishlist-spinner,
+.wishlist-loader {
+    background: #ffffff;
+}
+
+/* Small spinner for buttons */
+.btn-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: simple-spin 1s linear infinite;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+/* Quick view spinner (specific to quick view modal) */
+.quick-view-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.quick-view-spinner {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.quick-view-spinner .spinner-ring {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 6px solid transparent;
+    border-radius: 50%;
+    animation: spinner-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+.quick-view-spinner .spinner-ring:nth-child(1) {
+    border-top-color: #e91e63;
+    animation-delay: -0.45s;
+}
+
+.quick-view-spinner .spinner-ring:nth-child(2) {
+    border-top-color: #f06292;
+    animation-delay: -0.3s;
+}
+
+.quick-view-spinner .spinner-ring:nth-child(3) {
+    border-top-color: #f8bbd9;
+    animation-delay: -0.15s;
+}
+
+.quick-view-spinner .spinner-ring:nth-child(4) {
+    border-top-color: #fce4ec;
+}
+
+.loading-text {
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Pulse animation for loading states */
+.pulse-loading {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* =============== RESPONSIVE DESIGN =============== */
+@media (max-width: 768px) {
+    .spinner-ring-container {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .spinner-ring {
+        width: 60px;
+        height: 60px;
+        margin: 10px;
+        border-width: 4px;
+    }
+    
+    .spinner-text {
+        font-size: 16px;
+    }
+    
+    .simple-spinner {
+        width: 50px;
+        height: 50px;
+        border-width: 3px;
+    }
+}
+
+@media (max-width: 480px) {
+    .spinner-ring-container {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .spinner-ring {
+        width: 40px;
+        height: 40px;
+        margin: 10px;
+        border-width: 3px;
+    }
+    
+    .spinner-text {
+        font-size: 14px;
+    }
+    
+    .simple-spinner {
+        width: 40px;
+        height: 40px;
+        border-width: 2px;
+    }
+}

@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!--=============== FLATICON ===============-->
+        <link
+            rel="stylesheet"
+            href="https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css"
+        />
+
+        <!--BoxIcon CDN-->
+        <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+        />
+
+        <!--=============== SWIPER CSS ===============-->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+        />
+
+        <!-- NOTYF CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css"
+        />        <!--=============== CSS ===============-->
+        <link rel="stylesheet" href="assets/css/nav-bar.css" />
+        <link rel="stylesheet" href="assets/css/hamburger-mob.css" />
+        <link rel="stylesheet" href="assets/css/styles.css" />
+        <link rel="stylesheet" href="./assets/css/shop.css" />
+        <link rel="stylesheet" href="./assets/css/auth-modal.css" />
+        <link rel="stylesheet" href="./assets/css/product-cards.css" />
+        <link rel="stylesheet" href="./assets/css/details.css" />
+        <link rel="stylesheet" href="./assets/css/details-image.css" />
+        <link rel="stylesheet" href="./assets/css/details-mobile.css" />
+        <link rel="stylesheet" href="./assets/css/force-override.css" />
+        <link rel="stylesheet" href="./assets/css/quick-view.css" />
+        <link rel="stylesheet" href="./assets/css/spinner.css" />
+        <link rel="stylesheet" href="./assets/css/details-quick-view-override.css" />
+        <link rel="stylesheet" href="./assets/css/chatbot.css" />
+        
+        <title>Chandria's La Robe</title>
+    </head>
+    <body>
+        <!-- Page Loading Spinner -->
+        <div id="page-spinner" class="page-spinner">
+            <div class="spinner-content">
+                <div class="spinner-ring-container">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p class="spinner-text">Loading Products, Please Wait.</p>
+            </div>
+        </div>
+
+        <!--=============== HEADER ===============-->
+        <header class="header">
+            <nav class="nav container">
+                <a href="../index.html" class="nav-logo">
+                    <img
+                        src="assets/img/logo1.png"
+                        alt=""
+                        class="nav-logo-img"
+                    />
+                </a>                <div class="nav-menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li class="nav-item">
+                            <a href="../index.html" class="nav-link">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#categories" class="nav-link">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="shop.html" class="nav-link">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../index.html#contact" class="nav-link">About</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="header-user-actions">
+                    <!-- Mobile Hamburger Menu -->
+                    <div class="hamburger-menu" id="hamburger-menu">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </div>                    <a href="wishlist.html" class="header-action-btn">
+                        <img src="assets/img/icon-heart.svg" alt="" />
+                        <span class="count" id="wishlist-count">0</span>
+                    </a>
+
+                    <a href="cart.html" class="header-action-btn">
+                        <img src="assets/img/icon-cart.svg" alt="" />
+                        <span class="count" id="cart-count">0</span>
+                    </a>
+
+                    <button onclick="window.profileNavService?.handleAccountClick() || showAuthModal()" class="header-action-btn" style="background: none; border: none; cursor: pointer;" id="account-btn">
+                        <img src="assets/img/icon-user.svg" alt="" />
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="../index.html" class="mobile-nav-link">Home</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#categories" class="mobile-nav-link">Categories</a>
+                    </li>                    <li class="mobile-nav-item">
+                        <a href="shop.html" class="mobile-nav-link">Shop</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#reviews" class="mobile-nav-link">Reviews</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#contact" class="mobile-nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+        </header>
+
+        <!--=============== MAIN ===============-->
+        <main class="main">
+            <!--=============== DETAILS ===============-->
+            <section class="details section-lg">
+                <div class="details-container container grid">
+                    <div class="details-group">
+                        <div class="details-main-image-container">
+                            <img
+                                src="assets/img/product-6-1.jpg"
+                                alt=""
+                                class="details-img main-product-image frontImage"
+                                id="main-product-image"
+                            />
+                        </div>
+
+                        <div class="details-small-images grid">
+                            <img
+                                src="assets/img/product-6-1.jpg"
+                                alt=""
+                                class="details-small-img frontImage thumbnail active"
+                                onclick="switchMainImage(this.src)"
+                            />
+                            <img
+                                src="assets/img/product-6-2.jpg"
+                                alt=""
+                                class="details-small-img backImage thumbnail"
+                                onclick="switchMainImage(this.src)"
+                            />
+                        </div>
+                    </div>
+                    <div class="details-group">
+                        <h3 class="details-title" id="product-name">
+                            Colorful Pattern Shirt
+                        </h3>
+                        <!--             <p class="details-brand">Brand: <span>Giordano</span></p> -->
+
+                        <div class="details-price flex">
+                            <span class="new-price" id="product-price"
+                                >₱ 900</span
+                            >
+                            <!--<span class="old-price">₱ 2500</span>
+<span class="save-price">64% off</span> -->
+                        </div>
+
+                        <p class="short-description" id="product-description">
+                            A red gown is a long, often formal dress, typically
+                            worn for special occasions, that features the color
+                            red. Red gowns can be found in various styles, from
+                            elegant evening gowns to more playful, modern
+                            designs.
+                        </p>
+
+                        <ul class="product-list">
+                            <li class="list-item flex">
+                                <i class="fi fi-rs-clothes-hanger"></i> Free
+                                Fitting Service Before Rental
+                            </li>
+
+                            <li class="list-item flex">
+                                <i class="fi fi-rs-sparkles"></i> Pre-Cleaned
+                                and Sanitized
+                            </li>
+
+                            <li class="list-item flex">
+                                <i class="fi fi-rs-running"></i> Ready-to-Wear
+                                in Perfect Condition
+                            </li>
+                        </ul>
+
+                        <div class="details-color flex">
+                            <span class="details-color-title">Color</span>
+                            <ul class="color-list">
+                                <li>
+                                    <a
+                                        href="#"
+                                        class="color-link"
+                                        id="product-color"
+                                        style="
+                                            background-color: rgb(29, 29, 177);
+                                        "
+                                    ></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="details-size flex">
+                            <span class="details-size-title"
+                                >Available Sizes</span
+                            >
+                            <ul class="size-list" id="product-sizes">
+                                <li>
+                                    <a href="#" class="size-link size-active"
+                                        >S</a
+                                    >
+                                </li>
+
+                                <li>
+                                    <a href="#" class="size-link">M</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="size-link">L</a>
+                                </li>
+                                <li>
+                                    <a href="#" class="size-link">XL</a>
+                                </li>
+                            </ul>
+                            <!-- Mobile Stock Indicator -->
+                            <div class="mobile-stock-indicator" id="mobile-stock-indicator">
+                                <span class="stock-label">Stock:</span>
+                                <span class="stock-number" id="mobile-stock-number">0</span>
+                            </div>
+                        </div>                        <div class="details-action">
+                            <div class="booking-product-name" id="booking-product-name">Colorful Pattern Shirt</div>
+                            <div class="quantity-container">
+                                <button type="button" class="quantity-btn decrease" onclick="decreaseQuantity()">−</button>
+                                <input
+                                    type="number"
+                                    class="quantity"
+                                    min="1"
+                                    value="1"
+                                    id="details-quantity"
+                                    readonly
+                                />
+                                <button type="button" class="quantity-btn increase" onclick="increaseQuantity()">+</button>
+                            </div>                            <button class="btn btn-primary" id="details-add-to-cart">Add to Booking</button>
+                            <button class="details-action-btn add-to-favorites-btn" id="details-add-to-favorites" data-product-id="">
+                                <i class="bx bx-heart"></i>
+                            </button>
+                        </div>
+
+                        <ul class="details-meta">
+                            <li class="meta-list flex">
+                                Product Code:
+                                <span id="product-code"> </span>
+                            </li>
+                            <li class="meta-list flex">
+                                Total Stocks:
+                                <span id="product-stock"> </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>            <!--=============== PRODUCTS ===============-->
+            <section class="products container section-lg">
+                <h3 class="section-title">Related Products</h3>
+
+                <div class="products-container grid" id="related-products-container">
+                    <!-- Related products will be dynamically loaded here -->
+                </div>            </section>
+
+            <!--=============== MOBILE STICKY ACTION BAR ===============-->
+            <div class="mobile-sticky-bar" id="mobile-sticky-bar">
+                <div class="mobile-sticky-content">
+                    <!-- Quantity Controls -->
+                    <div class="mobile-quantity-container">
+                        <button type="button" class="mobile-quantity-btn mobile-decrease" onclick="decreaseQuantity()">−</button>
+                        <input
+                            type="number"
+                            class="mobile-quantity"
+                            min="1"
+                            value="1"
+                            id="mobile-sticky-quantity"
+                            readonly
+                        />
+                        <button type="button" class="mobile-quantity-btn mobile-increase" onclick="increaseQuantity()">+</button>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="mobile-sticky-buttons">
+                        <button class="mobile-btn mobile-btn-primary" id="mobile-add-to-cart">Add to Booking</button>
+                        <button class="mobile-favorites-btn" id="mobile-add-to-favorites" data-product-id="">
+                            <i class="bx bx-heart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!--=============== AUTHENTICATION MODAL ===============-->
+        <div id="auth-modal" class="auth-modal-container">
+            <div class="auth-modal">
+                <button class="auth-close" id="auth-close">
+                    &times;
+                </button>
+                
+                <div class="auth-content">
+                    <!-- Left Side - Image -->
+                    <div class="auth-image-section">
+                        <img src="assets/img/authenimage.jpg" alt="Chandria's La Robe" class="auth-image" />
+                    </div>
+                    
+                    <!-- Right Side - Forms -->
+                    <div class="auth-form-section">
+                        <!-- Sign In Form -->
+                        <div class="auth-form active" id="signin-form">
+                            <div class="auth-header">
+                                <h2>Welcome Back</h2>
+                                <p>Sign in to your account</p>
+                            </div>
+                            
+                            <form class="auth-form-content" id="signin-form-element">
+                                <div class="auth-input-group">
+                                    <label for="signin-email">Email Address</label>
+                                    <input type="email" id="signin-email" name="email" required />
+                                </div>
+                                
+                                <div class="auth-input-group">
+                                    <label for="signin-password">Password</label>
+                                    <input type="password" id="signin-password" name="password" required />
+                                </div>
+                                
+                                <div class="auth-forgot">
+                                    <a href="#" id="forgot-password-link">Forgot Password?</a>
+                                </div>
+                                
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Sign In
+                                </button>
+                                
+                                <div class="auth-divider">
+                                    <span>or</span>
+                                </div>
+                                  <div class="auth-social">                                    <button type="button" class="auth-social-btn google-btn" id="google-signin" title="Sign in with Google">
+                                        <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                                            <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                                            <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                                            <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                                        </svg>
+                                        <span>Continue with Google</span>
+                                    </button>
+                                </div>
+                                
+                                <div class="auth-switch">
+                                    <span>Don't have an account? </span>
+                                    <a href="#" id="switch-to-signup">Sign Up</a>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Sign Up Form -->
+                        <div class="auth-form" id="signup-form">
+                            <div class="auth-header">
+                                <h2>Create Account</h2>
+                                <p>Join us for the perfect fitting experience</p>
+                            </div>
+                            
+                            <form class="auth-form-content" id="signup-form-element">
+                                <!-- Full Name -->
+                                <div class="auth-input-group">
+                                    <label for="signup-fullname">Full Name</label>
+                                    <input type="text" id="signup-fullname" name="fullname" required />
+                                </div>
+                                
+                                <!-- Contact Number -->
+                                <div class="auth-input-group">
+                                    <label for="signup-contact">Contact Number</label>
+                                    <input type="tel" id="signup-contact" name="contact" required />
+                                </div>
+                                
+                                <!-- Email Address -->
+                                <div class="auth-input-group">
+                                    <label for="signup-email">Email Address</label>
+                                    <input type="email" id="signup-email" name="email" required />
+                                </div>
+                                
+                                <!-- Password and Confirm Password in one row -->
+                                <div class="auth-input-row">
+                                    <!-- Password -->
+                                    <div class="auth-input-group">
+                                        <label for="signup-password">Password</label>
+                                        <input type="password" id="signup-password" name="password" required />
+                                    </div>
+                                    
+                                    <!-- Confirm Password -->
+                                    <div class="auth-input-group">
+                                        <label for="signup-confirm-password">Confirm Password</label>
+                                        <input type="password" id="signup-confirm-password" name="confirm-password" required />
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Sign Up
+                                </button>
+                                
+                                <div class="auth-switch">
+                                    <span>Already have an account? </span>
+                                    <a href="#" id="switch-to-signin">Sign in</a>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Forgot Password Form -->
+                        <div class="auth-form" id="forgot-form">
+                            <div class="auth-header">
+                                <h2>Reset Password</h2>
+                                <p>Enter your email to receive reset instructions</p>
+                            </div>
+                            
+                            <form class="auth-form-content" id="forgot-form-element">
+                                <div class="auth-input-group">
+                                    <label for="forgot-email">Email Address</label>
+                                    <input type="email" id="forgot-email" name="email" required />
+                                </div>
+                                
+                                <button type="submit" class="auth-btn auth-btn-primary">
+                                    Send Reset Link
+                                </button>
+                                
+                                <div class="auth-switch">
+                                    <a href="#" id="back-to-signin">Back to Sign In</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--=============== SWIPER JS ===============-->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+        <!-- NOTYF CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+        <!-- JQUERY CDN -->
+        <script
+            src="https://code.jquery.com/jquery-3.7.1.js"
+            integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+            crossorigin="anonymous"        ></script>        <!-- EXTERNAL SCRIPT -->        <script src="./assets/js/spinner/spinner-core.js"></script>
+        <script src="./assets/js/spinner/spinner-page.js"></script>
+        <script src="./assets/js/spinner/spinner-utils.js"></script>
+        <script src="./assets/js/quick-view/quick-view.js"></script>
+        <script src="./assets/js/nav-bar.js"></script>
+        <script src="./assets/js/hamburger-mob.js"></script>
+        <script type="module" src="./assets/js/profile-nav-service.js"></script>
+        <script type="module" src="./assets/js/auth-modal.js"></script>
+        <script type="module" src="./assets/js/wishlist-firebase.js"></script>
+        <script type="module" src="./assets/js/details.js"></script>
+        <script src="./assets/js/details-mobile.js"></script>
+        <script type="module" src="./assets/js/chatbot/chatbot-init.js"></script>
+        
+        <script>
+            // Function to switch the main image when clicking on thumbnails
+            function switchMainImage(imgSrc) {
+                // Update main image source
+                document.getElementById('main-product-image').src = imgSrc;
+                
+                // Remove active class from all thumbnails
+                const thumbnails = document.querySelectorAll('.details-small-img');
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                
+                // Add active class to the clicked thumbnail
+                const clickedThumb = Array.from(thumbnails).find(thumb => thumb.src === imgSrc);
+                if (clickedThumb) {
+                    clickedThumb.classList.add('active');
+                }
+            }
+            
+            // Set the first thumbnail as active on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                const firstThumb = document.querySelector('.details-small-img');
+                if (firstThumb) {
+                    firstThumb.classList.add('active');
+                }
+            });
+        </script>
+    </body>
+</html>

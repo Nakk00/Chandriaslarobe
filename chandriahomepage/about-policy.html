@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-------------------------------- FLATICON --------------------------------->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-straight/css/uicons-regular-straight.css'>
+
+    <!-------------------------------- GOOGLE FONTS --------------------------------->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">    <!-------------------------------- CSS --------------------------------->
+    <link rel="stylesheet" href="assets/css/nav-bar.css" />
+    <link rel="stylesheet" href="assets/css/hamburger-mob.css" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+    <link rel="stylesheet" href="assets/css/about-policy.css" />
+    <link rel="stylesheet" href="assets/css/auth-modal.css" />
+    <link rel="stylesheet" href="assets/css/chatbot.css" />
+    <link rel="stylesheet" href="assets/css/spinner.css" />
+    <link rel="stylesheet" href="assets/css/footer-fixes.css" />
+    
+    <title>About Us & Policies - Chandria's La Robe</title>
+</head>
+<body>    <!-------------------------------- PAGE SPINNER -------------------------------->
+    <div id="page-spinner" class="page-spinner">
+        <div class="spinner-content">
+            <div class="spinner-ring-container">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            <p class="spinner-text">Loading page, please wait...</p>
+        </div>
+    </div>
+
+    <!-------------------------------- HEADER -------------------------------->
+    <header class="header modern-header" id="header">
+        <nav class="nav container">
+            <a href="../index.html" class="nav-logo">
+                <img src="assets/img/logo1.png" alt="" class="nav-logo-img">
+            </a>            <div class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="../index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../index.html#categories" class="nav-link">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="shop.html" class="nav-link">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../index.html#reviews" class="nav-link">Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Mobile Hamburger Menu -->
+            <div class="hamburger-menu" id="hamburger-menu">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+
+            <!-- User Actions -->
+            <div class="header-user-actions">
+                <a href="wishlist.html" class="header-action-btn">
+                    <img src="assets/img/icon-heart.svg" alt="">
+                    <span class="count" id="wishlist-count">0</span>
+                </a>
+
+                <a href="cart.html" class="header-action-btn">
+                    <img src="assets/img/icon-cart.svg" alt="">
+                    <span class="count" id="cart-count">0</span>
+                </a>
+
+                <button class="header-action-btn" id="account-btn" onclick="window.profileNavService?.handleAccountClick() || showAuthModal()" style="background: none; border: none; cursor: pointer;">
+                    <img src="assets/img/icon-user.svg" alt="">
+                </button>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div class="mobile-nav-menu" id="mobile-nav-menu">
+                <ul class="mobile-nav-list">
+                    <li class="mobile-nav-item">
+                        <a href="../index.html" class="mobile-nav-link">Home</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="../index.html#categories" class="mobile-nav-link">Categories</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="shop.html" class="mobile-nav-link">Shop</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#about" class="mobile-nav-link">About</a>
+                    </li>
+                    <li class="mobile-nav-item">
+                        <a href="#policies" class="mobile-nav-link">Policies</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-------------------------------- MAIN -------------------------------->
+    <main class="main">
+        <!-------------------------------- ABOUT SECTION -------------------------------->
+        <section class="about-section section" id="about">
+            <div class="container">
+                <div class="about-header">
+                    <h1 class="section-title typewriter">About Chandria's La Robe</h1>
+                    <p class="about-subtitle">Your premier destination for elegant gown and suit rentals</p>
+                </div>
+
+                <div class="about-content">
+                    <div class="about-story policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-heart"></i>
+                            Our Story
+                        </h2>
+                        <div class="policy-text">
+                            <p>Founded with a passion for elegance and the perfect fit, Chandria's La Robe has been serving the community with exceptional rental experiences. We believe that every special occasion deserves the perfect outfit, and our carefully curated collection ensures you'll find exactly what you're looking for.</p>
+                            
+                            <p>Our physical store provides a personalized shopping experience where expert stylists help you find the perfect gown or suit. We take pride in our attention to detail and commitment to making every customer feel confident and beautiful.</p>
+                        </div>
+                    </div>
+
+                    <div class="about-mission policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-diamond"></i>
+                            Our Mission & Values
+                        </h2>
+                        <div class="policy-text">
+                            <h3>Our Mission</h3>
+                            <p>To provide exceptional rental experiences through high-quality, carefully maintained garments, professional fitting and styling services, personalized customer care, and sustainable fashion solutions.</p>
+                            
+                            <h3>Our Values</h3>
+                            <ul>
+                                <li>Quality craftsmanship and attention to detail</li>
+                                <li>Personalized service for every customer</li>
+                                <li>Sustainable fashion and responsible business practices</li>
+                                <li>Professional expertise and styling consultation</li>
+                                <li>Creating memorable experiences for special occasions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="about-services policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-tags"></i>
+                            Our Services
+                        </h2>
+                        <div class="policy-text">
+                            <div class="services-grid">
+                                <div class="service-item">
+                                    <h3><i class="fi fi-rs-dress"></i> Gown Rentals</h3>
+                                    <p>Wedding gowns, evening dresses, ball gowns, and special occasion wear for all your important events.</p>
+                                </div>
+                                <div class="service-item">
+                                    <h3>👔 Suit Rentals</h3>
+                                    <p>Formal suits, tuxedos, business attire, and special occasion menswear.</p>
+                                </div>
+                                <div class="service-item">
+                                    <h3><i class="fi fi-rs-scissors"></i> Alterations Service</h3>
+                                    <p>We have a skilled seamstress who can alter gowns and suits to fit your exact measurements perfectly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-------------------------------- POLICIES SECTION -------------------------------->
+        <section class="policies-section section" id="policies">
+            <div class="container">
+                <div class="policy-header">
+                    <h1 class="policy-title typewriter">Business Policies</h1>
+                    <p class="policy-subtitle">Understanding our rental policies and procedures</p>
+                </div>
+
+                <div class="policy-content">
+                    <!-- Appointment & Booking Policy -->
+                    <div class="policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-calendar"></i>
+                            Appointment & Booking Policy
+                        </h2>
+                        <div class="policy-text">                            <h3>Scheduling Appointments</h3>
+                            <ul>
+                                <li>Free fitting for up to 3 items/products. Additional fittings are ₱100 each</li>
+                                <li>All fittings require advance booking through our website or phone</li>
+                                <li>Appointments are available Monday-Sunday 8:00 AM - 9:00 PM</li>
+                                <li>Allow 1-2 hours for your fitting session</li>
+                                <li>Group bookings available for bridal parties and special events</li>
+                                <li>Please arrive 15 minutes early for your scheduled appointment</li>
+                            </ul>                            <h3>Cancellation Policy</h3>
+                            <ul>
+                                <li>Appointments may be cancelled or rescheduled up to 24 hours in advance</li>
+                                <li>Same-day cancellations may result in a cancellation fee</li>
+                                <li>No-shows will be charged the full appointment fee</li>
+                                <li>Late arrivals may result in shortened appointment time</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Rental Terms -->
+                    <div class="policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-contract"></i>
+                            Rental Terms & Conditions
+                        </h2>
+                        <div class="policy-text">
+                            <h3>Rental Period</h3>
+                            <ul>
+                                <li>Standard rental period is 3-7 days depending on the item</li>
+                                <li>Extended rental periods available upon request for additional fees</li>
+                                <li>Items must be returned by the agreed-upon date to avoid late fees</li>
+                                <li>Overdue fees will be equal to your rental fee for each day that you are late</li>
+                            </ul>
+
+                            <h3>Rental Fees</h3>
+                            <ul>
+                                <li>Rental fees vary by item and rental duration</li>
+                                <li>Security deposit required for all rentals (refundable upon return)</li>
+                                <li>Payment accepted: cash, credit card, bank transfer</li>
+                                <li>Full payment required before item pickup</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Care & Maintenance -->
+                    <div class="policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-heart"></i>
+                            Care & Maintenance Guidelines
+                        </h2>
+                        <div class="policy-text">
+                            <h3>Customer Responsibilities</h3>
+                            <ul>
+                                <li>Items must be handled with care and kept in excellent condition</li>
+                                <li>Smoking, eating, or drinking while wearing rentals is prohibited</li>
+                                <li>Professional cleaning included in rental fee - do not attempt to clean items yourself</li>
+                                <li>Store items in provided garment bags when not in use</li>
+                            </ul>
+
+                            <h3>Damage Policy</h3>
+                            <ul>
+                                <li>Minor wear is expected and included in rental fee</li>
+                                <li>Excessive damage, stains, or tears will result in repair/replacement charges</li>
+                                <li>Damage assessment will be conducted upon return</li>
+                                <li>Customer will be notified of any damage charges within 48 hours</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Alterations Services -->
+                    <div class="policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-scissors"></i>
+                            Alterations Services
+                        </h2>
+                        <div class="policy-text">
+                            <h3>Custom Fitting</h3>
+                            <ul>
+                                <li>Our skilled seamstress provides expert alterations for all gowns and suits</li>
+                                <li>Garments are carefully adjusted to fit your exact measurements</li>
+                                <li>Multiple fitting sessions available for complex alterations</li>
+                                <li>Final fitting recommended 2-3 days before your event</li>
+                            </ul>
+
+                            <h3>Alteration Services</h3>
+                            <ul>
+                                <li>Hemming and length adjustments for gowns and suits</li>
+                                <li>Taking in or letting out seams for perfect fit</li>
+                                <li>Bust and waist adjustments for gowns</li>
+                                <li>Sleeve and trouser length modifications</li>
+                                <li>All alterations are temporary and items will be restored to original condition</li>
+                                <li>Rush alterations available for additional fee</li>
+                            </ul>
+                        </div>
+                    </div>                    <!-- Health & Safety -->
+                    <div class="policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-shield-check"></i>
+                            Health & Safety Protocol
+                        </h2>
+                        <div class="policy-text">
+                            <h3>Hygiene Standards</h3>
+                            <ul>
+                                <li>All items are professionally cleaned and sanitized between rentals</li>
+                                <li>Undergarments must be worn during all fittings</li>
+                                <li>Hand sanitizer available throughout our physical store</li>
+                                <li>Fitting rooms are sanitized after each use</li>
+                                <li>We follow all local health and safety guidelines</li>
+                            </ul>
+
+                            <h3>Health Requirements</h3>
+                            <ul>
+                                <li>Customers feeling unwell should reschedule their appointments</li>
+                                <li>Face masks recommended during fitting sessions</li>
+                                <li>Please inform us of any allergies or skin sensitivities</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Privacy & Data Protection -->
+                    <div class="policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-lock"></i>
+                            Privacy & Data Protection
+                        </h2>
+                        <div class="policy-text">
+                            <h3>Information Collection</h3>
+                            <ul>
+                                <li>We collect necessary information for appointment booking and rental services</li>
+                                <li>Personal measurements and preferences are stored securely for future visits</li>
+                                <li>Photos may be taken for fitting records with customer consent</li>
+                            </ul>
+
+                            <h3>Data Protection</h3>
+                            <ul>
+                                <li>Customer information is kept confidential and secure</li>
+                                <li>Data is not shared with third parties without explicit consent</li>
+                                <li>Customers may request to view or delete their personal data</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="policy-section">
+                        <h2 class="policy-section-title">
+                            <i class="fi fi-rs-phone-call"></i>
+                            Contact & Support
+                        </h2>
+                        <div class="policy-text">
+                            <h3>Get in Touch</h3>
+                            <div class="contact-info-policy">
+                                <div class="contact-item-policy">
+                                    <strong>Phone:</strong> +63 912 345 6789
+                                </div>
+                                <div class="contact-item-policy">
+                                    <strong>Email:</strong> info@chandriaslarobe.com
+                                </div>                                <div class="contact-item-policy">
+                                    <strong>Address:</strong> 123 Fashion Street, Style District, Manila, Philippines
+                                </div>
+                                <div class="contact-item-policy">
+                                    <strong>Business Hours:</strong><br>
+                                    Monday - Saturday: 10:00 AM - 7:00 PM<br>
+                                    Sunday: 12:00 PM - 5:00 PM
+                                </div>
+                            </div>                            <h3>Questions or Concerns</h3>
+                            <p>If you have any questions about our policies or need clarification on any terms, please don't hesitate to contact us. Our team is here to ensure you have the best possible experience with Chandria's La Robe.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Back to Home Button -->
+                <div class="policy-footer">
+                    <a href="../index.html" class="btn btn-primary">
+                        <i class="fi fi-rs-arrow-left"></i>
+                        Back to Home
+                    </a>
+                    <a href="shop.html" class="btn btn-secondary">
+                        Browse Collection
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!--=============== AUTHENTICATION MODAL ===============-->
+    <div id="auth-modal" class="auth-modal-container">
+        <div class="auth-modal">
+            <button class="auth-close" id="auth-close">
+                &times;
+            </button>
+            
+            <div class="auth-content">
+                <!-- Left Side - Image -->
+                <div class="auth-image-section">
+                    <img src="assets/img/authenimage.jpg" alt="Chandria's La Robe" class="auth-image" />
+                </div>
+                
+                <!-- Right Side - Forms -->
+                <div class="auth-form-section">
+                    <!-- Sign In Form -->
+                    <div class="auth-form active" id="signin-form">
+                        <div class="auth-header">
+                            <h2>Welcome Back</h2>
+                            <p>Sign in to your account</p>
+                        </div>
+                        
+                        <form class="auth-form-content" id="signin-form-element">
+                            <div class="auth-input-group">
+                                <label for="signin-email">Email Address</label>
+                                <input type="email" id="signin-email" name="email" required />
+                            </div>
+                            
+                            <div class="auth-input-group">
+                                <label for="signin-password">Password</label>
+                                <input type="password" id="signin-password" name="password" required />
+                            </div>
+                            
+                            <div class="auth-forgot">
+                                <a href="#" id="forgot-password-link">Forgot Password?</a>
+                            </div>
+                            
+                            <button type="submit" class="auth-btn auth-btn-primary">
+                                Sign In
+                            </button>
+                            
+                            <div class="auth-divider">
+                                <span>or</span>
+                            </div>
+                              <div class="auth-social">
+                                <button type="button" class="auth-social-btn google-btn" id="google-signin" title="Sign in with Google">
+                                    <svg width="18" height="18" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/>
+                                        <path fill="#FF3D00" d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/>
+                                        <path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/>
+                                        <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571c.001-.001.002-.001.003-.002l6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/>
+                                    </svg>
+                                    <span>Continue with Google</span>
+                                </button>
+                            </div>
+                            
+                            <div class="auth-switch">
+                                <span>Don't have an account? </span>
+                                <a href="#" id="switch-to-signup">Sign Up</a>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Sign Up Form -->
+                    <div class="auth-form" id="signup-form">
+                        <div class="auth-header">
+                            <h2>Create Account</h2>
+                            <p>Join us for the perfect fitting experience</p>
+                        </div>
+                        
+                        <form class="auth-form-content" id="signup-form-element">
+                            <!-- Full Name -->
+                            <div class="auth-input-group">
+                                <label for="signup-fullname">Full Name</label>
+                                <input type="text" id="signup-fullname" name="fullname" required />
+                            </div>
+                            
+                            <!-- Contact Number -->
+                            <div class="auth-input-group">
+                                <label for="signup-contact">Contact Number</label>
+                                <input type="tel" id="signup-contact" name="contact" required />
+                            </div>
+                            
+                            <!-- Email Address -->
+                            <div class="auth-input-group">
+                                <label for="signup-email">Email Address</label>
+                                <input type="email" id="signup-email" name="email" required />
+                            </div>
+                            
+                            <!-- Password and Confirm Password in one row -->
+                            <div class="auth-input-row">
+                                <!-- Password -->
+                                <div class="auth-input-group">
+                                    <label for="signup-password">Password</label>
+                                    <input type="password" id="signup-password" name="password" required />
+                                </div>
+                                
+                                <!-- Confirm Password -->
+                                <div class="auth-input-group">
+                                    <label for="signup-confirm-password">Confirm Password</label>
+                                    <input type="password" id="signup-confirm-password" name="confirm-password" required />
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="auth-btn auth-btn-primary">
+                                Sign Up
+                            </button>
+                            
+                            <div class="auth-switch">
+                                <span>Already have an account? </span>
+                                <a href="#" id="switch-to-signin">Sign in</a>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Forgot Password Form -->
+                    <div class="auth-form" id="forgot-form">
+                        <div class="auth-header">
+                            <h2>Reset Password</h2>
+                            <p>Enter your email to receive reset instructions</p>
+                        </div>
+                        
+                        <form class="auth-form-content" id="forgot-form-element">
+                            <div class="auth-input-group">
+                                <label for="forgot-email">Email Address</label>
+                                <input type="email" id="forgot-email" name="email" required />
+                            </div>
+                            
+                            <button type="submit" class="auth-btn auth-btn-primary">
+                                Send Reset Link
+                            </button>
+                            
+                            <div class="auth-switch">
+                                <a href="#" id="back-to-signin">Back to Sign In</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-------------------------------- FOOTER -------------------------------->
+    <footer class="footer section">
+        <div class="container">
+            <p class="copyright">
+                &copy; 2025 Chandria's La Robe. All rights reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-------------------------------- JS --------------------------------->
+    <!--=============== JQUERY ===============-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!--=============== NOTYF NOTIFICATIONS ===============-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    
+    <script src="assets/js/nav-bar.js"></script>
+    <script src="assets/js/hamburger-mob.js"></script>
+    <script type="module" src="assets/js/profile-nav-service.js"></script>
+    <script type="module" src="assets/js/auth-modal.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script type="module" src="assets/js/wishlist-firebase.js"></script>
+      <script type="module" src="assets/js/about-policy.js"></script>
+    <script type="module" src="./assets/js/chatbot/chatbot-init.js"></script>
+    
+    <!-------------------------------- PAGE SPINNER SCRIPT --------------------------------->
+    <script>
+        // Hide spinner when page is fully loaded
+        window.addEventListener('load', function() {
+            const spinner = document.getElementById('page-spinner');
+            if (spinner) {
+                setTimeout(() => {
+                    spinner.classList.add('hidden');
+                    // Remove spinner from DOM after animation completes
+                    setTimeout(() => {
+                        spinner.style.display = 'none';
+                    }, 300);
+                }, 500); // Show spinner for at least 500ms for better UX
+            }
+        });
+
+        // Also hide spinner if page takes too long to load (fallback)
+        setTimeout(() => {
+            const spinner = document.getElementById('page-spinner');
+            if (spinner && !spinner.classList.contains('hidden')) {
+                spinner.classList.add('hidden');
+                setTimeout(() => {
+                    spinner.style.display = 'none';
+                }, 300);
+            }
+        }, 5000); // Maximum 5 seconds
+    </script>
+</body>
+</html>
